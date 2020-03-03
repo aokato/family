@@ -1,14 +1,17 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Top from "../views/Top.vue";
-
+import Event from "../views/Event.vue";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Top",
     component: Top,
+  },
+  {
+    path: "/events",
+    component: Event,
   },
 ];
 

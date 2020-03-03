@@ -1,13 +1,13 @@
 <template>
-  <div id="top">
-    <span>Topだよ</span>
+  <div id="event">
+    <span>Eventだよ</span>
   </div>
 </template>
 <script>
 export default {};
 </script>
-<style>
-#top {
+<style lang="scss" scoped>
+#event {
   width: 100%;
   margin-top: 50px;
   min-height: 100vh;
