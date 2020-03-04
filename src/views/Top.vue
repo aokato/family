@@ -9,7 +9,7 @@ export default {};
 <style>
 #top {
   width: 100%;
-  margin-top: 50px;
+  padding-top: 60px;
   min-height: 100vh;
   background: rgba(64, 184, 131, 0.1);
 }

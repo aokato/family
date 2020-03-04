@@ -9,7 +9,7 @@ export default {};
 <style lang="scss" scoped>
 #event {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 60px;
   min-height: 100vh;
   background: rgba(64, 184, 131, 0.1);
 }
