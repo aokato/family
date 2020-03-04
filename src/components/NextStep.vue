@@ -12,7 +12,15 @@ export default {};
   }
 }
 @media screen and (min-width: 700px) and (max-width: 1024px) {
+  #next-step {
+    background: white;
+    width: 70%;
+  }
 }
 @media screen and (min-width: 350px) and (max-width: 700px) {
+  #next-step {
+    background: white;
+    width: 70%;
+  }
 }
 </style>

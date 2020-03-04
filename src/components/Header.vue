@@ -136,6 +136,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    background: white;
 
     a {
       text-decoration: none;
@@ -301,12 +302,13 @@ export default {
       top: 0;
       right: 0;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
       z-index: 11;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       #mobile-link-container {
         width: 80%;
         height: 70vh;
