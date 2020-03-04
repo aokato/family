@@ -101,7 +101,7 @@ export default {
         width: 60%;
         min-height: 100vh;
         padding-top: 50px;
-        background: red;
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -125,7 +125,7 @@ export default {
         width: 40%;
         min-height: 100vh;
         padding-top: 50px;
-        background: blue;
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -187,7 +187,7 @@ export default {
         width: 100%;
         min-height: 100vh;
         padding-top: 50px;
-        background: red;
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -211,7 +211,7 @@ export default {
         width: 100%;
         min-height: 100vh;
         padding-top: 50px;
-        background: blue;
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -275,7 +275,7 @@ export default {
         width: 100%;
         min-height: 100vh;
         padding-top: 50px;
-        background: red;
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -299,7 +299,7 @@ export default {
         width: 100%;
         min-height: 100vh;
         padding-top: 50px;
-        background: blue;
+
         display: flex;
         flex-direction: column;
         align-items: center;
