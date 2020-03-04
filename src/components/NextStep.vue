@@ -9,18 +9,30 @@ export default {};
   #next-step {
     background: white;
     width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
 @media screen and (min-width: 700px) and (max-width: 1024px) {
   #next-step {
     background: white;
     width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
 @media screen and (min-width: 350px) and (max-width: 700px) {
   #next-step {
     background: white;
-    width: 70%;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>

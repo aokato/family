@@ -80,8 +80,7 @@ export default {
 @media screen and (min-width: 1024px) {
   #top {
     width: 100%;
-    padding-top: 50px;
-    min-height: 100vh;
+    padding: 50px 0;
     background: rgba(64, 184, 131, 0.1);
     display: flex;
     flex-direction: column;
@@ -151,8 +150,7 @@ export default {
 @media screen and (min-width: 700px) and (max-width: 1024px) {
   #top {
     width: 100%;
-    padding-top: 50px;
-    min-height: 100vh;
+    padding: 50px 0;
     background: rgba(64, 184, 131, 0.1);
     display: flex;
     flex-direction: column;
@@ -185,7 +183,7 @@ export default {
       }
       #top-left-tab {
         width: 100%;
-        min-height: 100vh;
+        min-height: 70vh;
         padding-top: 50px;
 
         display: flex;
@@ -193,14 +191,14 @@ export default {
         align-items: center;
         #status-container {
           width: 100%;
-          height: 40vh;
+          height: 25vh;
           display: flex;
           flex-direction: row;
           justify-content: center;
         }
         #next-step-container {
           width: 100%;
-          height: 30vh;
+          height: 25vh;
           margin-top: 40px;
           display: flex;
           flex-direction: row;
@@ -237,8 +235,7 @@ export default {
 @media screen and (min-width: 350px) and (max-width: 700px) {
   #top {
     width: 100%;
-    padding-top: 50px;
-    min-height: 100vh;
+    padding: 50px 0;
     background: rgba(64, 184, 131, 0.1);
     display: flex;
     flex-direction: column;
@@ -273,7 +270,7 @@ export default {
       }
       #top-left-tab {
         width: 100%;
-        min-height: 100vh;
+        min-height: 90vh;
         padding-top: 50px;
 
         display: flex;

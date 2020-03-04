@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Top from "../views/Top.vue";
 import Event from "../views/Event.vue";
+import Product from "../views/Products.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -12,6 +13,10 @@ const routes = [
   {
     path: "/events",
     component: Event,
+  },
+  {
+    path: "/products",
+    component: Product,
   },
 ];
 

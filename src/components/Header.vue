@@ -15,6 +15,11 @@
         Events
       </div>
     </router-link>
+    <router-link to="/products" class="mobile-hidden">
+      <div class="header-component">
+        Products
+      </div>
+    </router-link>
     <span
       class="menu-trigger slide"
       :class="{ active: isActive }"
@@ -32,6 +37,9 @@
           </router-link>
           <router-link to="/events">
             <span @click="isActive = false"> Events</span>
+          </router-link>
+          <router-link to="/products">
+            <span @click="isActive = false"> Products</span>
           </router-link>
         </div>
       </div>
@@ -60,6 +68,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
     background: white;
     a {
       text-decoration: none;
@@ -136,6 +145,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
     background: white;
 
     a {
@@ -214,6 +224,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
     background: white;
     a {
       text-decoration: none;
