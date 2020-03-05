@@ -1,10 +1,16 @@
 <template>
   <div id="products">
     <span>受講生のプロダクト一覧</span>
+    <Edit></Edit>
   </div>
 </template>
 <script>
-export default {};
+import Edit from "@/components/Edit.vue";
+export default {
+  components: {
+    Edit,
+  },
+};
 </script>
 <style lang="scss" scoped>
 #products {
