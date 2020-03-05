@@ -63,7 +63,7 @@ export default {
           text: html,
           title: this.title,
         })
-        .then(function(response) {
+        .then(function() {
           location.reload();
         })
         .catch(function(error) {

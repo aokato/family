@@ -4,16 +4,22 @@
       <span>GeekSalon Web Course</span>
     </div>
     <div class="post" @click="post = !post">
-      <span v-show="!post">新規投稿</span><span v-show="post">閉じる</span>
+      <span v-show="!post">新規投稿</span>
     </div>
     <div id="text-box-container" v-show="!post">
       <div class="text-box" v-for="text in texts" :key="text.id">
         <div class="topic">{{ text.title }}</div>
       </div>
     </div>
-    <div id="post-container">
-      <Edit v-show="post"></Edit>
-    </div>
+    <transition name="fade">
+      <div v-show="post" id="post-container">
+        <div class="post" @click="post = !post">
+          <span v-show="post">閉じる</span>
+        </div>
+        <h1>新規投稿</h1>
+        <Edit></Edit>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -45,6 +51,7 @@ export default {
     border: 2px solid rgba(255, 61, 85);
     margin-top: 30px;
     min-height: 70vh;
+    position: relative;
     #web-title {
       width: 100%;
       height: 120px;
@@ -107,7 +114,27 @@ export default {
       }
     }
     #post-container {
-      margin-top: 40px;
+      position: absolute;
+      width: 90vw;
+      top: -100px;
+      left: -90px;
+      z-index: 5;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      h1 {
+        text-align: center;
+        color: white;
+      }
+    }
+    .fade-enter-active,
+    .fade-leave-active {
+      will-change: opacity;
+      transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
+    .fade-enter,
+    .fade-leave-to {
+      opacity: 0;
     }
   }
 }
