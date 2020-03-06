@@ -16,8 +16,12 @@
         <div class="post" @click="post = !post">
           <span v-show="post">閉じる</span>
         </div>
-        <h1>新規投稿</h1>
-        <Edit></Edit>
+
+        <Edit>
+          <template v-slot:new-or-edit>
+            <h1>新規投稿</h1>
+          </template>
+        </Edit>
       </div>
     </transition>
   </div>
@@ -120,7 +124,7 @@ export default {
       left: -90px;
       z-index: 5;
       padding: 30px;
-      background: rgba(0, 0, 0, 0.7);
+
       overflow: hidden;
       h1 {
         text-align: center;
@@ -130,7 +134,7 @@ export default {
     .fade-enter-active,
     .fade-leave-active {
       will-change: opacity;
-      transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }
     .fade-enter,
     .fade-leave-to {
