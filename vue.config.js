@@ -1,3 +1,5 @@
 module.exports = {
-  transpileDependencies: ["vuetify"],
+  devServer: {
+    proxy: "https://family-rails-api.herokuapp.com",
+  },
 };
