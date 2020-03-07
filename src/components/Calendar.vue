@@ -1,8 +1,25 @@
 <template>
-  <div id="calender">カレンダー</div>
+  <v-calendar :attributes="attrs" />
+  <!-- <div id="calender">カレンダー</div> -->
 </template>
 <script>
-export default {};
+import Vue from "vue";
+import VCalendar from "v-calendar";
+Vue.use(VCalendar);
+
+export default {
+  data() {
+    return {
+      attrs: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date(),
+        },
+      ],
+    };
+  },
+};
 </script>
 <style lang="scss" scoped>
 @media screen and (min-width: 1024px) {
