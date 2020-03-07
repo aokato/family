@@ -8,7 +8,11 @@
     </div>
     <div id="text-box-container" v-show="!post">
       <div class="text-box" v-for="text in texts" :key="text.id">
-        <div class="topic">{{ text.title }}</div>
+        <div class="topic">
+          <router-link to="url(text.course,text.id)">{{
+            text.title
+          }}</router-link>
+        </div>
       </div>
     </div>
     <transition name="fade">
@@ -16,35 +20,24 @@
         <div class="post" @click="post = !post">
           <span v-show="post">閉じる</span>
         </div>
-
-        <Edit>
-          <template v-slot:new-or-edit>
-            <h1>新規投稿</h1>
-          </template>
-        </Edit>
       </div>
     </transition>
   </div>
 </template>
 <script>
-import Edit from "@/components/Edit.vue";
 export default {
-  components: {
-    Edit,
-  },
   data() {
     return {
       texts: null,
       post: false,
     };
   },
-  mounted() {
-    this.axios
-      .get("https://family-rails-api.herokuapp.com/api/v1/web.json")
-      .then(res => {
-        this.texts = res.data;
-      });
+  computed: {
+    url: function(course, id) {
+      return "/" + course + id;
+    },
   },
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>
