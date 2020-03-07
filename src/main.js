@@ -7,6 +7,7 @@ import VueAxios from "vue-axios"; //追記
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
+
 new Vue({
   router,
   vuetify,
