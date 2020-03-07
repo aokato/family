@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Top from "../views/Top.vue";
-
+import Event from "../views/Event.vue";
 import Product from "../views/Products.vue";
 import Show from "../views/Show.vue";
 Vue.use(VueRouter);
@@ -20,6 +20,11 @@ const routes = [
     path: "/:course/:id",
     name: "show",
     component: Show,
+  },
+  {
+    path: "/events",
+    name: "event",
+    component: Event,
   },
 ];
 

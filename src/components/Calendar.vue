@@ -13,7 +13,7 @@ export default {
       attrs: [
         {
           key: "today",
-          highlight: true,
+          highlight: "red",
           dates: new Date(),
         },
       ],
