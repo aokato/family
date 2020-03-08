@@ -1,5 +1,5 @@
 <template>
-  <v-calendar :attributes="attrs" />
+  <v-calendar :attributes="attributes" />
   <!-- <div id="calender">カレンダー</div> -->
 </template>
 <script>
@@ -9,7 +9,17 @@ Vue.use(VCalendar);
 
 export default {
   data() {
+    const todos = [
+      {
+        description: "フットサル",
+        isComplete: false,
+        dates: new Date(2020, 2, 27), // Every Friday
+        color: "red",
+      },
+    ];
     return {
+      incId: todos.length,
+      todos,
       attrs: [
         {
           key: "today",
@@ -18,6 +28,30 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    attributes() {
+      return [
+        {
+          key: "today",
+          highlight: "red",
+          dates: new Date(),
+        },
+
+        // Attributes for todos
+        ...this.todos.map(todo => ({
+          dates: todo.dates,
+          dot: {
+            color: todo.color,
+            class: todo.isComplete ? "opacity-75" : "",
+          },
+          popover: {
+            label: todo.description,
+          },
+          customData: todo,
+        })),
+      ];
+    },
   },
 };
 </script>

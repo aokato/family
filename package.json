@@ -10,11 +10,13 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "firebase": "^7.10.0",
     "mavon-editor": "^2.7.7",
     "v-calendar": "^1.0.0-beta.23",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
-    "vue-router": "^3.1.5"
+    "vue-router": "^3.1.5",
+    "vuefire": "^2.2.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.2.0",
