@@ -1,5 +1,22 @@
 module.exports = {
-  devServer: {
-    proxy: "https://family-rails-api.herokuapp.com",
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.md$/,
+          use: [
+            {
+              loader: "html-loader",
+            },
+            {
+              loader: "markdown-loader",
+              options: {
+                /* your options here */
+              },
+            },
+          ],
+        },
+      ],
+    },
   },
 };

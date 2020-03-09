@@ -1,8 +1,17 @@
 <template>
-  <div id="info">お知らせ</div>
+  <div>
+    <div v-html="sampleMd"></div>
+  </div>
 </template>
+
 <script>
-export default {};
+import sampleMd from "@/assets/markdowns/sample.md";
+
+export default {
+  created() {
+    this.sampleMd = sampleMd;
+  },
+};
 </script>
 <style lang="scss" scoped>
 @media screen and (min-width: 1024px) {
