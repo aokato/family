@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import error404 from "@/assets/markdowns/NotFound.md";
 import web11 from "@/assets/markdowns/web/1-1.md";
 import web12 from "@/assets/markdowns/web/1-2.md";
 export default {
@@ -19,6 +20,7 @@ export default {
   },
   data() {
     return {
+      error404: error404,
       web11: web11,
       web12: web12,
     };
@@ -32,6 +34,10 @@ export default {
 
         case "web/1-2. DemoDayについて":
           this.Md = this.web12;
+          break;
+
+        default:
+          this.Md = this.error404;
           break;
       }
     },

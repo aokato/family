@@ -84,13 +84,12 @@ a {
       margin-top: 20px;
       .text-box {
         width: 40%;
-
         border: 2px solid rgba(255, 61, 85);
+
         transition: all 300ms 0s ease;
         margin: 20px;
 
         .topic {
-          width: 100%;
           padding: 10px;
           text-align: left;
           background: white;
