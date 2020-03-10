@@ -3,44 +3,36 @@
     <div id="web-title">
       <span>GeekSalon Web Course</span>
     </div>
-    <div class="post" @click="post = !post">
-      <span v-show="!post">新規投稿</span>
-    </div>
-    <div id="text-box-container" v-show="!post">
-      <div class="text-box" v-for="text in texts" :key="text.id">
-        <div class="topic">
-          <router-link to="url(text.course,text.id)">{{
-            text.title
-          }}</router-link>
-        </div>
+
+    <div id="text-box-container">
+      <div class="text-box" v-for="link in links" :key="link.id">
+        <router-link :to="link.url">
+          <div class="topic">{{ link.title }}</div>
+        </router-link>
       </div>
     </div>
-    <transition name="fade">
-      <div v-show="post" id="post-container">
-        <div class="post" @click="post = !post">
-          <span v-show="post">閉じる</span>
-        </div>
-      </div>
-    </transition>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      texts: null,
-      post: false,
+      links: [
+        { title: "1-1. 3ヶ月の流れ", url: "/texts/web/1-1. 3ヶ月の流れ" },
+        {
+          title: "1-2. DemoDayについて",
+          url: "/texts/web/1-2. DemoDayについて",
+        },
+      ],
     };
-  },
-  computed: {
-    url: function(course, id) {
-      return "/" + course + id;
-    },
   },
   mounted() {},
 };
 </script>
 <style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
 @media screen and (min-width: 1024px) {
   #web {
     background: white;
@@ -96,6 +88,7 @@ export default {
         border: 2px solid rgba(255, 61, 85);
         transition: all 300ms 0s ease;
         margin: 20px;
+
         .topic {
           width: 100%;
           padding: 10px;
