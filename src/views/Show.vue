@@ -72,6 +72,15 @@ export default {
     margin-top: 60px;
     min-height: 100vh;
     background: rgba(64, 184, 131, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    #show-container {
+      width: 95%;
+      background-color: white;
+      padding: 30px 0 30px 0;
+    }
   }
 }
 @media screen and (min-width: 350px) and (max-width: 700px) {
@@ -80,6 +89,15 @@ export default {
     margin-top: 60px;
     min-height: 100vh;
     background: rgba(64, 184, 131, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    #show-container {
+      width: 100%;
+      background-color: white;
+      padding: 30px 0px 30px 0;
+    }
   }
 }
 </style>

@@ -2,6 +2,7 @@
   <div id="web-text">
     <div id="page-title" class="ppt ">{{ page_title }}</div>
     <div id="text" v-html="Md"></div>
+    <img src="@/assets/not_found.png" v-show="not_found" />
   </div>
 </template>
 
@@ -30,6 +31,7 @@ export default {
     return {
       page_title: this.title,
       error404: error404,
+      not_found: false,
       web11: web11,
       web12: web12,
       web13: web13,
@@ -82,6 +84,7 @@ export default {
           break;
         default:
           this.page_title = null;
+          this.not_found = true;
           this.Md = this.error404;
           break;
       }
@@ -90,37 +93,38 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.ppt {
-  position: relative;
-  padding: 2px 48px;
-  border-bottom: 1px solid #62a1cb;
-  font-weight: lighter;
-}
-.ppt:first-letter {
-  color: #62a1cb;
-}
-.ppt:before,
-.ppt:after {
-  content: "";
-  display: block;
-  position: absolute;
-}
-.ppt:before {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid #ddd;
-  bottom: -16px;
-  left: 8px;
-}
-.ppt:after {
-  height: 64px;
-  border-left: 1px solid #ddd;
-  bottom: -32px;
-  left: 24px;
-}
 @media screen and (min-width: 1024px) {
   #web-text {
+    width: 100%;
+    .ppt {
+      position: relative;
+      padding: 2px 48px;
+      border-bottom: 1px solid #62a1cb;
+      font-weight: lighter;
+    }
+    .ppt:first-letter {
+      color: #62a1cb;
+    }
+    .ppt:before,
+    .ppt:after {
+      content: "";
+      display: block;
+      position: absolute;
+    }
+    .ppt:before {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      bottom: -16px;
+      left: 8px;
+    }
+    .ppt:after {
+      height: 64px;
+      border-left: 1px solid #ddd;
+      bottom: -32px;
+      left: 24px;
+    }
     #page-title {
       font-size: 2.3rem;
       padding-top: 30px;
@@ -132,7 +136,61 @@ export default {
   }
 }
 @media screen and (min-width: 700px) and (max-width: 1024px) {
+  #web-text {
+    width: 100%;
+    .ppt {
+      position: relative;
+      padding: 2px 48px;
+      border-bottom: 1px solid #62a1cb;
+      font-weight: lighter;
+      width: 80%;
+    }
+    .ppt:first-letter {
+      color: #62a1cb;
+    }
+    .ppt:before,
+    .ppt:after {
+      content: "";
+      display: block;
+      position: absolute;
+    }
+    .ppt:before {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      bottom: -16px;
+      left: 8px;
+    }
+    .ppt:after {
+      height: 64px;
+      border-left: 1px solid #ddd;
+      bottom: -32px;
+      left: 24px;
+    }
+    #page-title {
+      font-size: 2rem;
+      padding-top: 30px;
+    }
+    #text {
+      padding-left: 40px;
+      padding-top: 30px;
+    }
+  }
 }
 @media screen and (min-width: 350px) and (max-width: 700px) {
+  #web-text {
+    width: 100%;
+    #page-title {
+      font-size: 1.8rem;
+      width: 90%;
+      padding-top: 30px;
+      margin-left: 10px;
+      border-bottom: 1px solid #62a1cb;
+    }
+    #text {
+      padding: 30px 10px 30px 10px;
+    }
+  }
 }
 </style>
