@@ -14,7 +14,72 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
     />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- highlight.jsの読み込み-->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/agate.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // code要素にファイル名などを付与する
+        var codes = document.querySelectorAll("code");
+        if (codes) {
+          Array.prototype.slice.call(codes).forEach(function(item) {
+            // クラスを取得
+            var classes = item.classList;
+            if (classes.length > 0) {
+              // ファイル名があればdata属性にセット
+              if (classes[0].indexOf(":")) {
+                var values = classes[0].split(":");
+                var filename = values[1];
+                if (filename) item.setAttribute("data-filename", filename);
+                // ファイル名を削除して言語クラスに変更する
+                item.classList.remove(classes[0]);
+                item.classList.add(values[0]);
+              }
+            }
+          });
+        }
+      });
+
+      // highlight.jsによるシンタックスハイライト
+      hljs.initHighlightingOnLoad();
+    </script>
+    <style>
+      .hljs {
+        position: relative;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .hljs[data-filename] {
+        padding-top: 1.8em;
+      }
+      .hljs[data-filename]::before {
+        content: attr(data-filename);
+        position: absolute;
+        top: 0;
+        left: 10px;
+        padding: 2px 5px;
+        color: white;
+        font-size: 0.93em;
+        background-color: #777777;
+        border-bottom-left-radius: 2px;
+      }
+      pre {
+        margin-top: 30px;
+      }
+      code {
+        padding-top: 40px;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+    </style>
+    <!-- 読み込み終了-->
   </head>
   <body>
     <noscript>

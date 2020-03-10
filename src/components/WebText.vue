@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>{{ page_title }}</div>
+    <!--<div>{{ page_title }}</div> -->
     <div v-html="Md"></div>
   </div>
 </template>
@@ -46,3 +46,11 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+@media screen and (min-width: 1024px) {
+}
+@media screen and (min-width: 700px) and (max-width: 1024px) {
+}
+@media screen and (min-width: 350px) and (max-width: 700px) {
+}
+</style>
