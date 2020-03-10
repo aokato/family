@@ -7,8 +7,10 @@
 
 <script>
 import error404 from "@/assets/markdowns/NotFound.md";
-import web11 from "@/assets/markdowns/web/1-1.md";
-import web12 from "@/assets/markdowns/web/1-2.md";
+import web11 from "@/assets/markdowns/web/1-1/1-1.md";
+import web12 from "@/assets/markdowns/web/1-2/1-2.md";
+import web21 from "@/assets/markdowns/web/2-1/2-1.md";
+import web22 from "@/assets/markdowns/web/2-2/2-2.md";
 export default {
   props: {
     folder: String,
@@ -24,6 +26,8 @@ export default {
       error404: error404,
       web11: web11,
       web12: web12,
+      web21: web21,
+      web22: web22,
     };
   },
   methods: {

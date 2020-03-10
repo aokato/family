@@ -5,10 +5,24 @@
     </div>
 
     <div id="text-box-container">
-      <div class="text-box" v-for="link in links" :key="link.id">
-        <router-link :to="link.url">
-          <div class="topic">{{ link.title }}</div>
-        </router-link>
+      <div v-for="n of links_length - 1" :key="n">
+        <div v-if="n % 2 !== 0">
+          <div class="section-title-box" v-if="link(n).first != false">
+            {{ link(n).first }}
+          </div>
+          <div class="text-box">
+            <router-link :to="link(n).url" class="topic">
+              <div>
+                {{ link(n).title }}
+              </div>
+            </router-link>
+            <router-link :to="link(n + 1).url" class="topic">
+              <div>
+                {{ link(n + 1).title }}
+              </div>
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -17,16 +31,42 @@
 export default {
   data() {
     return {
+      links_length: null,
       links: [
-        { title: "1-1. 3ヶ月の流れ", url: "/texts/web/1-1. 3ヶ月の流れ" },
+        {
+          title: "1-1. 3ヶ月の流れ",
+          url: "/texts/web/1-1. 3ヶ月の流れ",
+          first: "1章 Webコースの基礎",
+        },
         {
           title: "1-2. DemoDayについて",
           url: "/texts/web/1-2. DemoDayについて",
+          first: false,
+        },
+        {
+          title: "2-1. HTML/CSSの概要",
+          url: "/texts/web/2-1. HTML/CSSの概要",
+          first: "2章 フロントエンド入門",
+        },
+        {
+          title: "2-2. HTMLの基本",
+          url: "/texts/web/2-2. HTMLの基本",
+          first: false,
         },
       ],
     };
   },
-  mounted() {},
+  created() {
+    this.links_length = this.links.length;
+  },
+  computed: {
+    link: function() {
+      return function(id) {
+        let array = this.links;
+        return array[id - 1];
+      };
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -76,28 +116,37 @@ a {
       }
     }
     #text-box-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-around;
       width: 100%;
       margin-top: 20px;
+      .section-title-box {
+        display: block;
+        width: 100%;
+        font-size: 2rem;
+        background: rgba(255, 61, 85);
+        padding: 30px;
+        text-align: center;
+        box-sizing: border-box;
+      }
       .text-box {
-        width: 40%;
-        border: 2px solid rgba(255, 61, 85);
-
-        transition: all 300ms 0s ease;
-        margin: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        margin: 20px auto 20px auto;
 
         .topic {
+          display: block;
+          width: 40%;
           padding: 10px;
           text-align: left;
           background: white;
           color: rgba(255, 61, 85);
+          border: 2px solid rgba(255, 61, 85);
           font-weight: bold;
+          transition: all 300ms 0s ease;
         }
       }
-      .text-box:hover {
+      .topic:hover {
         transform: scale(1.05, 1.05);
         cursor: pointer;
       }
@@ -162,7 +211,6 @@ a {
         transition: all 300ms 0s ease;
         margin: 20px;
         .topic {
-          width: 100%;
           padding: 10px;
           text-align: left;
           background: white;
@@ -213,7 +261,6 @@ a {
         transition: all 300ms 0s ease;
         margin: 20px;
         .topic {
-          width: 100%;
           padding: 10px;
           text-align: left;
           background: white;
