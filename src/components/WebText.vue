@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>{{ title }}</div>
+    <div>{{ page_title }}</div>
     <div v-html="Md"></div>
   </div>
 </template>
@@ -20,6 +20,7 @@ export default {
   },
   data() {
     return {
+      page_title: this.title,
       error404: error404,
       web11: web11,
       web12: web12,
@@ -37,6 +38,7 @@ export default {
           break;
 
         default:
+          this.page_title = null;
           this.Md = this.error404;
           break;
       }
