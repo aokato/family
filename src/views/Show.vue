@@ -5,8 +5,10 @@
     </div>
   </div>
 </template>
+
 <script>
 import WebText from "@/components/WebText.vue";
+import hljs from "highlightjs";
 export default {
   components: {
     WebText,
@@ -19,6 +21,30 @@ export default {
   },
   beforeCreate() {
     document.scrollingElement.scrollTop = 0;
+  },
+  mounted() {
+    // code要素にファイル名などを付与する
+    var codes = document.querySelectorAll("code");
+    if (codes) {
+      Array.prototype.slice.call(codes).forEach(function(item) {
+        // クラスを取得
+        var classes = item.classList;
+        if (classes.length > 0) {
+          // ファイル名があればdata属性にセット
+          if (classes[0].indexOf(":")) {
+            var values = classes[0].split(":");
+            var filename = values[1];
+            if (filename) item.setAttribute("data-filename", filename);
+            // ファイル名を削除して言語クラスに変更する
+            item.classList.remove(classes[0]);
+            item.classList.add(values[0]);
+          }
+        }
+      });
+    }
+    document.querySelectorAll("pre code").forEach(block => {
+      hljs.highlightBlock(block);
+    });
   },
 };
 </script>
