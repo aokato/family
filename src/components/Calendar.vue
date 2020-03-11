@@ -5,6 +5,8 @@
 <script>
 import Vue from "vue";
 import VCalendar from "v-calendar";
+import { db } from "@/firebase";
+
 Vue.use(VCalendar);
 
 export default {
@@ -13,35 +15,33 @@ export default {
       {
         description: "フットサル",
         isComplete: false,
-        dates: new Date(2020, 2, 27), // Every Friday
+        dates: new Date(2020, 2, 27),
         color: "red",
       },
     ];
     return {
       incId: todos.length,
       todos,
-      attrs: [
-        {
-          key: "today",
-          highlight: "red",
-          dates: new Date(),
-        },
-      ],
+      event: [],
     };
   },
+  firestore: {
+    event: db.collection("event"),
+  },
+
   computed: {
     attributes() {
       return [
         {
           key: "today",
-          highlight: "red",
+          highlight: "blue",
           dates: new Date(),
         },
 
         // Attributes for todos
         ...this.todos.map(todo => ({
           dates: todo.dates,
-          dot: {
+          highlight: {
             color: todo.color,
             class: todo.isComplete ? "opacity-75" : "",
           },
