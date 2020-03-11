@@ -32,26 +32,190 @@
         </div>
       </div>
     </div>
-    <div id="web-products" v-if="active === 1"><ProductCard></ProductCard></div>
-    <div id="game-products" v-else-if="active === 2">コンテンツ2</div>
-    <div id="ios-products" v-else-if="active === 3">コンテンツ3</div>
-    <div id="webex-products" v-else-if="active === 4">コンテンツ4</div>
+
+    <div id="web-products" class="cards-container" v-if="active === 1">
+      <div v-for="(product, index) in web_products" :key="product.id">
+        <div :id="'web-product-' + index" @click="card_clicked(product, index)">
+          <ProductCard :product="product"></ProductCard>
+        </div>
+      </div>
+    </div>
+    <div id="game-products" class="cards-container" v-else-if="active === 2">
+      <div v-for="product in game_products" :key="product.id">
+        <ProductCard :product="product"></ProductCard>
+      </div>
+    </div>
+    <div id="ios-products" class="cards-container" v-else-if="active === 3">
+      コンテンツ3
+    </div>
+    <div id="webex-products" class="cards-container" v-else-if="active === 4">
+      コンテンツ4
+    </div>
+    <transition name="fade">
+      <div id="to-product-show" v-show="show">
+        <div id="show-component">
+          <ProductShow
+            :show.sync="show"
+            :which_product="which_product"
+          ></ProductShow>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
 import ProductCard from "@/components/ProductCard.vue";
+import ProductShow from "@/components/ProductShow.vue";
 export default {
   components: {
     ProductCard,
+    ProductShow,
   },
   data() {
     return {
       active: 1,
+      which_product: null,
+      show: false,
+      web_products: [
+        {
+          name: "横国の森",
+          image:
+            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1567933323/n4ydwrf1d667yo3v8g81.png",
+          info: "横国の授業と教員を横浜国大生視点から口コミするサイト",
+          maker: "尾りょーた",
+          tags: ["UI・UX", "ログイン機能なし"],
+          course: "web",
+        },
+        {
+          name: "Keio Search",
+          image:
+            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1579535788/xroikhoxrtmog8e9nt4g.png",
+          info:
+            "とあるﾒﾝﾀｰが受講生時代の三ヶ月に作ったものです。。 あれから手は加わってないバージョンです。。 これを見ると、自分もあの頃はもっと未熟だったんだなぁと思います。。。精進精進！🔥",
+          maker: "しょーたろー",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "web",
+        },
+        {
+          name: "カフェログ",
+          image:
+            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1577097826/pebboxgmrvvzidlurrpf.png",
+          info: "大学生の為のカフェ情報発信サイト",
+          maker: "しゅん",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "web",
+        },
+        {
+          name: "【公式】東京ディズニーランド",
+          image:
+            "https://media2.tokyodisneyresort.jp/home/tdl/top/mainL_201910_01.jpg",
+          info:
+            "東京ディズニーランドにて、楽しくかけがえのない思い出を残していただけるよう、東京ディズニーランドのイベント情報、アトラクションなど施設情報から、チケット、交通アクセスなどをご案内します。",
+          maker: "チームラボ",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "web",
+        },
+        {
+          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
+          image:
+            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
+          info:
+            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
+          maker: "尾りょーた",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "web",
+        },
+        {
+          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
+          image:
+            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
+          info:
+            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
+          maker: "ゆーた",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "game",
+        },
+        {
+          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
+          image:
+            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
+          info:
+            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "game",
+        },
+        {
+          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
+          image:
+            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
+          info:
+            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "game",
+        },
+      ],
+      game_products: [
+        {
+          name: "MonsterEscape",
+          image:
+            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1583845861/iyredtlyxzv2gqpndvzy.png",
+          info:
+            "見つかると追いかけてくるモンスターから逃げる、逃走中のようなゲームです。",
+          maker: "尾ゆーた",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "game",
+        },
+        {
+          name: "StrangeDreamTrips",
+          image:
+            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1575362109/hsr2ghysymwfeygfenww.png",
+          info:
+            "Unityちゃんの夢の世界を旅する横スクロール×シューティングゲーム",
+          maker: "匿名さん",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "game",
+        },
+        {
+          name: "CatAdventure",
+          image:
+            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1571898281/z4oaewiapvzlibobgib8.png",
+          info:
+            "次々と現れる障害物を避けよう！ クッキーをゲットしてボーナスポイントを貰いながら高得点を目指そう！",
+          maker: "こもり",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "game",
+        },
+        {
+          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
+          image:
+            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
+          info:
+            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
+          maker: "USJ管理人",
+          tags: ["美しいグラフィック", "横スク"],
+          course: "game",
+        },
+      ],
     };
   },
   methods: {
     change: function(num) {
       this.active = num;
+    },
+    card_clicked: function(product, index) {
+      // let height = document.getElementById("products").clientHeight;
+      document.getElementById("products").style.backgroundColor = "transparent";
+      let show_component = document.getElementById("show-component");
+      let id = "web-product-" + index;
+      let element = document.getElementById(id).getBoundingClientRect();
+      let aaa = document.getElementById("to-product-show");
+      let bbb = document.getElementById("products");
+      console.log(bbb.scrollHeight);
+      aaa.style.height = bbb.scrollHeight + "px";
+      let y = window.pageYOffset + element.top - 80;
+      show_component.style.top = y + "px";
+      this.which_product = product;
+      this.show = true;
     },
   },
 };
@@ -142,8 +306,14 @@ export default {
       }
     }
   }
+  .cards-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   #web-products {
-    border: 2px solid rgba(255, 61, 85);
+    border: 3px solid rgba(255, 61, 85);
     width: 90%;
     min-height: 500px;
     margin: 0px auto;
@@ -152,7 +322,7 @@ export default {
     padding: 20px;
   }
   #game-products {
-    border: 2px solid #4a78ff;
+    border: 3px solid #4a78ff;
     width: 90%;
     min-height: 500px;
     margin: 0px auto;
@@ -161,7 +331,7 @@ export default {
     padding: 20px;
   }
   #ios-products {
-    border: 2px solid #ff8546;
+    border: 3px solid #ff8546;
     width: 90%;
     min-height: 500px;
     margin: 0px auto;
@@ -170,13 +340,38 @@ export default {
     padding: 20px;
   }
   #webex-products {
-    border: 2px solid #e4c308;
+    border: 3px solid #e4c308;
     width: 90%;
     min-height: 500px;
     margin: 0px auto;
     background: white;
     box-sizing: border-box;
     padding: 20px;
+  }
+  #to-product-show {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 30px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    padding-bottom: 100px;
+    #show-component {
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 }
 </style>
