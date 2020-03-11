@@ -34,15 +34,35 @@
     </div>
 
     <div id="web-products" class="cards-container" v-if="active === 1">
-      <div v-for="(product, index) in web_products" :key="product.id">
-        <div :id="'web-product-' + index" @click="card_clicked(product, index)">
+      <div
+        v-for="(product, index) in web_products"
+        :key="product.id"
+        data-aos="fade-top"
+        data-aos-duration="1000"
+        data-aos-once="true"
+      >
+        <div
+          :id="'web-product-' + index"
+          @click="card_clicked(product, index, 'web')"
+        >
           <ProductCard :product="product"></ProductCard>
         </div>
       </div>
     </div>
     <div id="game-products" class="cards-container" v-else-if="active === 2">
-      <div v-for="product in game_products" :key="product.id">
-        <ProductCard :product="product"></ProductCard>
+      <div
+        v-for="(product, index) in game_products"
+        :key="product.id"
+        data-aos="fade-top"
+        data-aos-duration="1000"
+        data-aos-once="true"
+      >
+        <div
+          :id="'game-product-' + index"
+          @click="card_clicked(product, index, 'game')"
+        >
+          <ProductCard :product="product"></ProductCard>
+        </div>
       </div>
     </div>
     <div id="ios-products" class="cards-container" v-else-if="active === 3">
@@ -202,16 +222,25 @@ export default {
     change: function(num) {
       this.active = num;
     },
-    card_clicked: function(product, index) {
+    card_clicked: function(product, index, course) {
       // let height = document.getElementById("products").clientHeight;
       document.getElementById("products").style.backgroundColor = "transparent";
       let show_component = document.getElementById("show-component");
-      let id = "web-product-" + index;
+      let id = null;
+      if (course == "web") {
+        id = "web-product-" + index;
+      } else if (course == "game") {
+        id = "game-product-" + index;
+      } else if (course == "ios") {
+        id = "ios-product-" + index;
+      } else {
+        id = "webex-product-" + index;
+      }
+
       let element = document.getElementById(id).getBoundingClientRect();
-      let aaa = document.getElementById("to-product-show");
-      let bbb = document.getElementById("products");
-      console.log(bbb.scrollHeight);
-      aaa.style.height = bbb.scrollHeight + "px";
+      let to_product_show = document.getElementById("to-product-show");
+      let products = document.getElementById("products");
+      to_product_show.style.height = products.scrollHeight + "px";
       let y = window.pageYOffset + element.top - 80;
       show_component.style.top = y + "px";
       this.which_product = product;
@@ -221,157 +250,471 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#products {
-  width: 100%;
-  min-height: 100vh;
-  padding-top: 100px;
-  background: rgba(64, 184, 131, 0.1);
-  #tabMenu-container {
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin: 0 auto;
-    #tabMenu {
-      padding: 0;
+@media screen and (min-width: 1024px) {
+  #products {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 100px;
+    background: rgba(64, 184, 131, 0.1);
+    #tabMenu-container {
+      width: 90%;
       display: flex;
-      list-style-type: none;
-      #web-tab {
-        width: auto;
-        padding: 10px 20px;
-        color: black;
-        border: 1px solid rgba(255, 61, 85);
-        border-bottom: transparent;
-        background-color: white;
-        cursor: pointer;
-        margin-left: 30px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-      }
-      #web-tab.active {
-        color: white;
-        background-color: rgba(255, 61, 85);
-        transition: 0.3s;
-      }
-      #game-tab {
-        width: auto;
-        padding: 10px 20px;
-        color: black;
-        border: 1px solid #4a78ff;
-        border-bottom: transparent;
-        background-color: white;
-        cursor: pointer;
-        margin-left: 30px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-      }
-      #game-tab.active {
-        color: white;
-        background-color: #4a78ff;
-        transition: 0.3s;
-      }
-      #ios-tab {
-        width: auto;
-        padding: 10px 20px;
-        color: black;
-        border: 1px solid #ff8546;
-        border-bottom: transparent;
-        background-color: white;
-        cursor: pointer;
-        margin-left: 30px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-      }
-      #ios-tab.active {
-        color: white;
-        background-color: #ff8546;
-        transition: 0.3s;
-      }
-      #webex-tab {
-        width: auto;
-        padding: 10px 20px;
-        color: black;
-        border: 1px solid #e4c308;
-        border-bottom: transparent;
-        background-color: white;
-        cursor: pointer;
-        margin-left: 30px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-      }
-      #webex-tab.active {
-        color: white;
-        background-color: #e4c308;
-        transition: 0.3s;
+      flex-direction: row;
+      justify-content: flex-start;
+      margin: 0 auto;
+      #tabMenu {
+        padding: 0;
+        display: flex;
+        list-style-type: none;
+        #web-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid rgba(255, 61, 85);
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #web-tab.active {
+          color: white;
+          background-color: rgba(255, 61, 85);
+          transition: 0.3s;
+        }
+        #game-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #4a78ff;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #game-tab.active {
+          color: white;
+          background-color: #4a78ff;
+          transition: 0.3s;
+        }
+        #ios-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #ff8546;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #ios-tab.active {
+          color: white;
+          background-color: #ff8546;
+          transition: 0.3s;
+        }
+        #webex-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #e4c308;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #webex-tab.active {
+          color: white;
+          background-color: #e4c308;
+          transition: 0.3s;
+        }
       }
     }
-  }
-  .cards-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  #web-products {
-    border: 3px solid rgba(255, 61, 85);
-    width: 90%;
-    min-height: 500px;
-    margin: 0px auto;
-    background: white;
-    box-sizing: border-box;
-    padding: 20px;
-  }
-  #game-products {
-    border: 3px solid #4a78ff;
-    width: 90%;
-    min-height: 500px;
-    margin: 0px auto;
-    background: white;
-    box-sizing: border-box;
-    padding: 20px;
-  }
-  #ios-products {
-    border: 3px solid #ff8546;
-    width: 90%;
-    min-height: 500px;
-    margin: 0px auto;
-    background: white;
-    box-sizing: border-box;
-    padding: 20px;
-  }
-  #webex-products {
-    border: 3px solid #e4c308;
-    width: 90%;
-    min-height: 500px;
-    margin: 0px auto;
-    background: white;
-    box-sizing: border-box;
-    padding: 20px;
-  }
-  #to-product-show {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding-top: 30px;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.5);
-    padding-bottom: 100px;
-    #show-component {
+    .cards-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    #web-products {
+      border: 3px solid rgba(255, 61, 85);
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #game-products {
+      border: 3px solid #4a78ff;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #ios-products {
+      border: 3px solid #ff8546;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #webex-products {
+      border: 3px solid #e4c308;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #to-product-show {
       position: absolute;
       top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding-top: 30px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.5);
+      padding-bottom: 100px;
+      #show-component {
+        position: absolute;
+        top: 0;
+      }
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
     }
   }
+}
+@media screen and (min-width: 700px) and (max-width: 1024px) {
+  #products {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 100px;
 
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s;
+    background: rgba(64, 184, 131, 0.1);
+    #tabMenu-container {
+      width: 90%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      margin: 0 auto;
+      #tabMenu {
+        padding: 0;
+        display: flex;
+        list-style-type: none;
+        #web-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid rgba(255, 61, 85);
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #web-tab.active {
+          color: white;
+          background-color: rgba(255, 61, 85);
+          transition: 0.3s;
+        }
+        #game-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #4a78ff;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #game-tab.active {
+          color: white;
+          background-color: #4a78ff;
+          transition: 0.3s;
+        }
+        #ios-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #ff8546;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #ios-tab.active {
+          color: white;
+          background-color: #ff8546;
+          transition: 0.3s;
+        }
+        #webex-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #e4c308;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #webex-tab.active {
+          color: white;
+          background-color: #e4c308;
+          transition: 0.3s;
+        }
+      }
+    }
+    .cards-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    #web-products {
+      border: 3px solid rgba(255, 61, 85);
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #game-products {
+      border: 3px solid #4a78ff;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #ios-products {
+      border: 3px solid #ff8546;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #webex-products {
+      border: 3px solid #e4c308;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #to-product-show {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding-top: 30px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.5);
+      padding-bottom: 800px;
+      #show-component {
+        position: absolute;
+        top: 0;
+      }
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
+    }
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
+}
+@media screen and (min-width: 350px) and (max-width: 700px) {
+  #products {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background: rgba(64, 184, 131, 0.1);
+    #tabMenu-container {
+      width: 90%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      margin: 0 auto;
+      #tabMenu {
+        padding: 0;
+        display: flex;
+        list-style-type: none;
+        #web-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid rgba(255, 61, 85);
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #web-tab.active {
+          color: white;
+          background-color: rgba(255, 61, 85);
+          transition: 0.3s;
+        }
+        #game-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #4a78ff;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #game-tab.active {
+          color: white;
+          background-color: #4a78ff;
+          transition: 0.3s;
+        }
+        #ios-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #ff8546;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #ios-tab.active {
+          color: white;
+          background-color: #ff8546;
+          transition: 0.3s;
+        }
+        #webex-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #e4c308;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #webex-tab.active {
+          color: white;
+          background-color: #e4c308;
+          transition: 0.3s;
+        }
+      }
+    }
+    .cards-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    #web-products {
+      border: 3px solid rgba(255, 61, 85);
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #game-products {
+      border: 3px solid #4a78ff;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #ios-products {
+      border: 3px solid #ff8546;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #webex-products {
+      border: 3px solid #e4c308;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #to-product-show {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding-top: 30px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.5);
+      padding-bottom: 100px;
+      #show-component {
+        position: absolute;
+        top: 0;
+      }
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
+    }
   }
 }
 </style>
