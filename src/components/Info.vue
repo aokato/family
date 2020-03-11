@@ -1,5 +1,7 @@
 <template>
-  <div id="info">お知らせ</div>
+  <div id="info">
+    お知らせ
+  </div>
 </template>
 <script>
 export default {};
