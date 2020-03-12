@@ -52,7 +52,11 @@
           :id="'web-product-' + index"
           @click="card_clicked(product, index, 'web')"
         >
-          <ProductCard :product="product"></ProductCard>
+          <ProductCard
+            :product="product"
+            :index="index"
+            :course="'web'"
+          ></ProductCard>
         </div>
       </div>
     </div>
@@ -68,7 +72,11 @@
           :id="'game-product-' + index"
           @click="card_clicked(product, index, 'game')"
         >
-          <ProductCard :product="product"></ProductCard>
+          <ProductCard
+            :product="product"
+            :index="index"
+            :course="'game'"
+          ></ProductCard>
         </div>
       </div>
     </div>
@@ -113,8 +121,8 @@ export default {
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1567933323/n4ydwrf1d667yo3v8g81.png",
           info: "横国の授業と教員を横浜国大生視点から口コミするサイト",
           maker: "尾りょーた",
-          tags: ["UI・UX", "ログイン機能なし"],
-          course: "web",
+
+          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
           name: "Keio Search",
@@ -123,8 +131,8 @@ export default {
           info:
             "とあるﾒﾝﾀｰが受講生時代の三ヶ月に作ったものです。。 あれから手は加わってないバージョンです。。 これを見ると、自分もあの頃はもっと未熟だったんだなぁと思います。。。精進精進！🔥",
           maker: "しょーたろー",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "web",
+
+          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
           name: "カフェログ",
@@ -132,8 +140,8 @@ export default {
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1577097826/pebboxgmrvvzidlurrpf.png",
           info: "大学生の為のカフェ情報発信サイト",
           maker: "しゅん",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "web",
+
+          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails", "Bootstrap"],
         },
         {
           name: "【公式】東京ディズニーランド",
@@ -142,8 +150,8 @@ export default {
           info:
             "東京ディズニーランドにて、楽しくかけがえのない思い出を残していただけるよう、東京ディズニーランドのイベント情報、アトラクションなど施設情報から、チケット、交通アクセスなどをご案内します。",
           maker: "チームラボ",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "web",
+
+          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
@@ -152,8 +160,8 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           maker: "尾りょーた",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "web",
+
+          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
@@ -162,8 +170,8 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           maker: "ゆーた",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "game",
+
+          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
@@ -172,7 +180,7 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           tags: ["美しいグラフィック", "横スク"],
-          course: "game",
+          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
@@ -180,8 +188,8 @@ export default {
             "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "game",
+
+          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
       ],
       game_products: [
@@ -192,8 +200,8 @@ export default {
           info:
             "見つかると追いかけてくるモンスターから逃げる、逃走中のようなゲームです。",
           maker: "尾ゆーた",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "game",
+
+          langages: ["C#", "Unity"],
         },
         {
           name: "StrangeDreamTrips",
@@ -202,8 +210,8 @@ export default {
           info:
             "Unityちゃんの夢の世界を旅する横スクロール×シューティングゲーム",
           maker: "匿名さん",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "game",
+
+          langages: ["C#", "Unity"],
         },
         {
           name: "CatAdventure",
@@ -212,8 +220,8 @@ export default {
           info:
             "次々と現れる障害物を避けよう！ クッキーをゲットしてボーナスポイントを貰いながら高得点を目指そう！",
           maker: "こもり",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "game",
+
+          langages: ["C#", "Unity"],
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
@@ -222,8 +230,8 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           maker: "USJ管理人",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "game",
+
+          langages: ["C#", "Unity"],
         },
       ],
     };
@@ -232,16 +240,16 @@ export default {
     change: function(num) {
       this.active = num;
     },
-    card_clicked: function(product, index, course) {
+    card_clicked: function(product, index, langages) {
       // let height = document.getElementById("products").clientHeight;
       document.getElementById("products").style.backgroundColor = "transparent";
       let show_component = document.getElementById("show-component");
       let id = null;
-      if (course == "web") {
+      if (langages == "web") {
         id = "web-product-" + index;
-      } else if (course == "game") {
+      } else if (langages == "game") {
         id = "game-product-" + index;
-      } else if (course == "ios") {
+      } else if (langages == "ios") {
         id = "ios-product-" + index;
       } else {
         id = "webex-product-" + index;
@@ -265,6 +273,7 @@ export default {
     width: 100%;
     min-height: 100vh;
     padding-top: 100px;
+    padding-bottom: 100px;
     background: rgba(64, 184, 131, 0.1);
     #tabMenu-container {
       width: 90%;
@@ -370,7 +379,7 @@ export default {
       flex-wrap: wrap;
     }
     #web-products {
-      border: 3px solid rgba(255, 61, 85);
+      border: 1px solid rgba(255, 61, 85);
       width: 90%;
       min-height: 500px;
       margin: 0px auto;
@@ -379,7 +388,7 @@ export default {
       padding: 20px;
     }
     #game-products {
-      border: 3px solid #4a78ff;
+      border: 1px solid #4a78ff;
       width: 90%;
       min-height: 500px;
       margin: 0px auto;
@@ -388,7 +397,7 @@ export default {
       padding: 20px;
     }
     #ios-products {
-      border: 3px solid #ff8546;
+      border: 1px solid #ff8546;
       width: 90%;
       min-height: 500px;
       margin: 0px auto;
@@ -397,7 +406,7 @@ export default {
       padding: 20px;
     }
     #webex-products {
-      border: 3px solid #e4c308;
+      border: 1px solid #e4c308;
       width: 90%;
       min-height: 500px;
       margin: 0px auto;
@@ -406,7 +415,7 @@ export default {
       padding: 20px;
     }
     #other-products {
-      border: 3px solid #40b883;
+      border: 1px solid #40b883;
       width: 90%;
       min-height: 500px;
       margin: 0px auto;

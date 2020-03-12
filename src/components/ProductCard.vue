@@ -1,7 +1,11 @@
 <template>
   <div id="product-card">
     <div id="image-container">
-      <img :src="product.image" />
+      <img
+        :id="course + '-image-' + index"
+        v-on:load="load(course, index)"
+        :src="product.image"
+      />
     </div>
     <div id="info-container">
       <h2 v-if="product.name.length <= 13">
@@ -18,6 +22,25 @@
 export default {
   props: {
     product: Object,
+    index: Number,
+    course: String,
+  },
+  methods: {
+    load: function(course, index) {
+      let element = course + "-image-" + index;
+      let image = document.getElementById(element);
+      let naturalWidth = image.naturalWidth;
+      let naturalHeight = image.naturalHeight;
+      if (naturalWidth % naturalHeight == 0) {
+        image.style.width = 200 + "px";
+        image.style.height = 200 + "px";
+      } else {
+        image.style.width = 100 + "%";
+        image.style.maxHeight = 200 + "px";
+      }
+      // let targetbox = course + "-image-container-" + index;
+      //   let image_box = document.getElementById(targetbox);
+    },
   },
 };
 </script>
@@ -33,7 +56,10 @@ export default {
     margin: 20px;
     #image-container {
       width: 100%;
-
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
       img {
         width: 100%;
         max-height: 200px;
@@ -77,11 +103,6 @@ export default {
     margin: 20px;
     #image-container {
       width: 100%;
-
-      img {
-        width: 100%;
-        max-height: 100px;
-      }
     }
     #info-container {
       padding: 10px;
