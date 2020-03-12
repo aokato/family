@@ -30,6 +30,13 @@
         >
           WebEx
         </div>
+        <div
+          id="other-tab"
+          v-on:click="change(5)"
+          v-bind:class="{ active: active === 5 }"
+        >
+          Others
+        </div>
       </div>
     </div>
 
@@ -69,6 +76,9 @@
       コンテンツ3
     </div>
     <div id="webex-products" class="cards-container" v-else-if="active === 4">
+      コンテンツ4
+    </div>
+    <div id="other-products" class="cards-container" v-else-if="active === 5">
       コンテンツ4
     </div>
     <transition name="fade">
@@ -334,6 +344,23 @@ export default {
           background-color: #e4c308;
           transition: 0.3s;
         }
+        #other-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #40b883;
+          border-bottom: transparent;
+          background-color: white;
+          cursor: pointer;
+          margin-left: 30px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        #other-tab.active {
+          color: white;
+          background-color: #40b883;
+          transition: 0.3s;
+        }
       }
     }
     .cards-container {
@@ -371,6 +398,15 @@ export default {
     }
     #webex-products {
       border: 3px solid #e4c308;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    #other-products {
+      border: 3px solid #40b883;
       width: 90%;
       min-height: 500px;
       margin: 0px auto;
