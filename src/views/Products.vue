@@ -1,5 +1,18 @@
 <template>
   <div id="products">
+    <h1 id="title">List of Works</h1>
+
+    <div id="new-button-container">
+      <button type="button" @click="clicked_post()">
+        <span>+</span>Add Your Product
+      </button>
+    </div>
+
+    <transition name="fade">
+      <div id="new-post-cotnainer" v-show="post_show">
+        <Post :post_show.sync="post_show"></Post>
+      </div>
+    </transition>
     <div id="tabMenu-container">
       <div id="tabMenu">
         <div
@@ -104,16 +117,39 @@
 <script>
 import ProductCard from "@/components/ProductCard.vue";
 import ProductShow from "@/components/ProductShow.vue";
+import Post from "@/components/PostProduct.vue";
 export default {
   components: {
     ProductCard,
     ProductShow,
+    Post,
+  },
+  watch: {
+    post_show: function(val) {
+      if (val == true) {
+        document.getElementById("products").style.backgroundColor =
+          "transparent";
+      } else {
+        document.getElementById("products").style.backgroundColor =
+          "rgba(64, 184, 131, 0.1)";
+      }
+    },
+    show: function(val) {
+      if (val == true) {
+        document.getElementById("products").style.backgroundColor =
+          "transparent";
+      } else {
+        document.getElementById("products").style.backgroundColor =
+          "rgba(64, 184, 131, 0.1)";
+      }
+    },
   },
   data() {
     return {
       active: 1,
       which_product: null,
       show: false,
+      post_show: false,
       web_products: [
         {
           name: "横国の森",
@@ -242,9 +278,10 @@ export default {
     },
     card_clicked: function(product, index, langages) {
       // let height = document.getElementById("products").clientHeight;
-      document.getElementById("products").style.backgroundColor = "transparent";
+      //  document.getElementById("products").style.backgroundColor = "transparent";
       let show_component = document.getElementById("show-component");
       let id = null;
+
       if (langages == "web") {
         id = "web-product-" + index;
       } else if (langages == "game") {
@@ -254,7 +291,6 @@ export default {
       } else {
         id = "webex-product-" + index;
       }
-
       let element = document.getElementById(id).getBoundingClientRect();
       let to_product_show = document.getElementById("to-product-show");
       let products = document.getElementById("products");
@@ -263,6 +299,14 @@ export default {
       show_component.style.top = y + "px";
       this.which_product = product;
       this.show = true;
+    },
+
+    clicked_post: function() {
+      let products = document.getElementById("products");
+      let post_container = document.getElementById("new-post-cotnainer");
+      let height = products.scrollHeight;
+      post_container.style.height = height + "px";
+      this.post_show = true;
     },
   },
 };
@@ -275,6 +319,48 @@ export default {
     padding-top: 100px;
     padding-bottom: 100px;
     background: rgba(64, 184, 131, 0.1);
+    #new-post-cotnainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding-top: 100px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    #title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    #new-button-container {
+      width: 70%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      line-height: 1.8rem;
+      span {
+        display: inline-block;
+        margin-right: 20px;
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+      button[type="button"] {
+        display: inline-block;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: white;
+        padding: 10px 20px 15px 20px;
+        font-size: 1.3rem;
+        cursor: pointer;
+      }
+      button[type="button"]:focus {
+        outline: 0;
+      }
+    }
     #tabMenu-container {
       width: 90%;
       display: flex;
