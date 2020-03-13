@@ -1,5 +1,5 @@
 <template>
-  <v-calendar :attributes="attributes" />
+  <v-calendar :attributes="attributes" is-expanded />
   <!-- <div id="calender">カレンダー</div> -->
 </template>
 <script>
