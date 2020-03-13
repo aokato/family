@@ -94,6 +94,7 @@ export default {
 h1 {
   position: relative;
   padding-left: 25px;
+  text-align: center;
 }
 
 h1:before {
