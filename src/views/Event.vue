@@ -12,7 +12,7 @@
           />
           <div class="card-content">
             <h1 class="card-title">{{ event.description }}</h1>
-            <p>{{ event.date | moment }}</p>
+            <p>日時：{{ event.date | moment }}</p>
             <p class="card-text">
               このあとイベント説明用のフィールドを追加して表示させるよん
             </p>
