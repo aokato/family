@@ -1,7 +1,7 @@
 <template>
   <div id="event">
     <Calendar></Calendar>
-    <div>直近開催されるイベント</div>
+    <h1>直近開催されるイベント</h1>
     <div class="card_container">
       <div v-for="(event, index) in event" :key="index">
         <section class="card">
@@ -89,6 +89,31 @@ export default {
   margin-top: 60px;
   min-height: 100vh;
   background: rgba(64, 184, 131, 0.1);
+}
+
+h1 {
+  position: relative;
+  padding-left: 25px;
+}
+
+h1:before {
+  position: absolute;
+  content: "";
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  border-left: solid 15px transparent;
+  border-bottom: solid 15px rgb(119, 195, 223);
+}
+h1:after {
+  position: absolute;
+  content: "";
+  bottom: -3px;
+  left: 10px;
+  width: 100%;
+  border-bottom: solid 3px rgb(119, 195, 223);
 }
 
 .card_container {
