@@ -5,7 +5,12 @@
       <span id="close" @click="close()">×</span>
       <div id="product-show-right-left-container">
         <div id="product-show-container-left">
-          <img id="image" :src="which_product.image" />
+          <div class="image-container" v-if="post == false">
+            <img id="image1" :src="which_product.image" />
+          </div>
+          <div class="image-container" v-else>
+            <img id="image2" src="" />
+          </div>
         </div>
         <div id="product-show-container-right">
           <div id="title-container">
@@ -34,16 +39,49 @@ export default {
   props: {
     which_product: Object,
     show: Boolean,
+    post: Boolean,
   },
   data() {
     return {
       menu_show: this.show,
     };
   },
+  watch: {
+    show: function(val) {
+      if (val === true) {
+        document.getElementById("image2").src = document.getElementById(
+          "image"
+        ).src;
+      }
+    },
+  },
+
   methods: {
     close: function() {
       this.menu_show = false;
       this.$emit("update:show", this.menu_show);
+    },
+    test: function() {
+      document.getElementById("image2").src = document.getElementById(
+        "image"
+      ).src;
+      alert("hello");
+    },
+  },
+  filters: {
+    img: function(value) {
+      var file = value;
+      console.dir(file);
+      /* let fileReader = new FileReader();
+      // 読み込み完了時の処理を追加
+      fileReader.onload = function() {
+        const url = this.result;
+        // img要素に表示
+        var img = document.getElementById("image");
+        img.src = url;
+        this.url = file;
+      };
+      fileReader.readAsDataURL(file);*/
     },
   },
 };
@@ -95,9 +133,11 @@ export default {
           height: auto;
           margin-right: 40px;
           padding-top: 40px;
-          img {
-            width: 100%;
-            height: auto;
+          .image-container {
+            img {
+              width: 100%;
+              height: auto;
+            }
           }
         }
         #product-show-container-right {

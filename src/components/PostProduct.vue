@@ -15,8 +15,9 @@
             画像を変更する
             <input
               type="file"
-              onchange="image.src = window.URL.createObjectURL(this.files[0])"
               style="display:none"
+              id="file_upload"
+              @change="selectedFile($event)"
             />
           </label>
         </div>
@@ -61,13 +62,18 @@
       <div id="product-info-container">
         <textarea v-model="text" placeholder="紹介文を入力"></textarea>
       </div>
+
       <div id="send_button_container">
         <button @click="post()">確認</button>
       </div>
     </div>
     <transition name="fade">
       <div id="confirm-box" v-show="confirm_show">
-        <ProductShow :show.sync="confirm_show" :which_product="which_product">
+        <ProductShow
+          :show.sync="confirm_show"
+          :post="true"
+          :which_product="which_product"
+        >
           <template v-slot:theme>
             <h1 style="text-align:center;">Confirm</h1>
           </template>
@@ -86,6 +92,19 @@ export default {
   components: {
     ProductShow,
   },
+  watch: {
+    confirm_show: function(val) {
+      if (val == true) {
+        document.getElementById("new-post-cotnainer").style.backgroundColor =
+          "transparent";
+        document.getElementById("confirm-box").style.paddingBottom = 100 + "px";
+      } else {
+        document.getElementById("new-post-cotnainer").style.backgroundColor =
+          "rgba(0, 0, 0, 0.4)";
+        document.getElementById("confirm-box").style.paddingBottom = 0;
+      }
+    },
+  },
   data() {
     return {
       show: this.post_show,
@@ -94,9 +113,9 @@ export default {
       developer: "",
       langages: [],
       text: "",
+      url: null,
       which_product: {
-        image:
-          "http://res.cloudinary.com/dyl2mrrok/image/upload/v1571898281/z4oaewiapvzlibobgib8.png",
+        image: null,
         name: null,
         maker: null,
         langages: null,
@@ -141,16 +160,29 @@ export default {
         }
       }
     },
+    selectedFile: function(event) {
+      var file = event.target.files[0];
+      let fileReader = new FileReader();
+      // 読み込み完了時の処理を追加
+      fileReader.onload = function() {
+        const url = this.result;
+
+        // img要素に表示
+        var img = document.getElementById("image");
+        img.src = url;
+      };
+      fileReader.readAsDataURL(file);
+    },
     post: function() {
       let product = {
-        image:
-          "http://res.cloudinary.com/dyl2mrrok/image/upload/v1571898281/z4oaewiapvzlibobgib8.png",
+        image: this.url,
         name: this.product_name,
         maker: this.developer,
         langages: this.langages,
         info: this.text,
       };
       this.which_product = product;
+      console.log(this.which_product);
       document.getElementById("confirm-box").style.height =
         document.getElementById("products").scrollHeight + "px";
       document.getElementById("new-post-cotnainer").style.backgroundColor =
@@ -391,6 +423,13 @@ export default {
       z-index: 20;
       background: rgba(0, 0, 0, 0.3);
     }
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 }
 @media screen and (min-width: 700px) and (max-width: 1024px) {

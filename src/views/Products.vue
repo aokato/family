@@ -107,6 +107,7 @@
         <div id="show-component">
           <ProductShow
             :show.sync="show"
+            :post="false"
             :which_product="which_product"
           ></ProductShow>
         </div>
