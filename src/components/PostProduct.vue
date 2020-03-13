@@ -5,14 +5,20 @@
       <span id="close" @click="close()">×</span>
       <div id="product-post-right-left-container">
         <div id="product-post-container-left">
-          <img
-            id="image"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-          />
-          <input
-            type="file"
-            onchange="image.src = window.URL.createObjectURL(this.files[0])"
-          />
+          <div id="image-box">
+            <img
+              id="image"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            />
+          </div>
+          <label class="upload-img-btn">
+            画像を変更する
+            <input
+              type="file"
+              onchange="image.src = window.URL.createObjectURL(this.files[0])"
+              style="display:none"
+            />
+          </label>
         </div>
         <div id="product-post-container-right">
           <div id="title-container">
@@ -55,10 +61,15 @@
       <div id="product-info-container">
         <textarea v-model="text" placeholder="紹介文を入力"></textarea>
       </div>
+      <div id="send_button_container">
+        <button @click="post()">送信</button>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import { db } from "@/firebase";
+
 export default {
   props: {
     post_show: Boolean,
@@ -108,6 +119,15 @@ export default {
           this.langages.push(name);
         }
       }
+    },
+    post: function() {
+      alert("aaa");
+      db.collection("products").add({
+        name: this.product_name,
+        maker: this.developer,
+        langages: this.langages,
+        info: this.text,
+      });
     },
   },
 };
@@ -165,9 +185,33 @@ export default {
           height: auto;
           margin-right: 40px;
           padding-top: 40px;
-          img {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          #image-box {
             width: 100%;
-            height: auto;
+            height: 300px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            img {
+              max-width: 100%;
+              max-height: 300px;
+            }
+          }
+          .upload-img-btn {
+            margin: 60px auto 0 auto;
+            padding: 15px;
+            border-radius: 4px;
+            max-width: 120px;
+            text-align: center;
+            display: block;
+            background-color: #f1f1f1;
+            color: #73a9ff;
+            box-shadow: 0 2px 6px rgba(146, 146, 146, 0.8);
+            cursor: pointer;
           }
         }
         #product-post-container-right {

@@ -272,6 +272,18 @@ export default {
       ],
     };
   },
+  created() {
+    db.collection("tweets")
+      .get()
+      .then(snapshot => {
+        snapshot.docs.forEach(doc => {
+          this.tweets.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+      });
+  },
   methods: {
     change: function(num) {
       this.active = num;
