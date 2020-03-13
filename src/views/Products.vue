@@ -118,6 +118,7 @@
 import ProductCard from "@/components/ProductCard.vue";
 import ProductShow from "@/components/ProductShow.vue";
 import Post from "@/components/PostProduct.vue";
+import { db } from "@/firebase";
 export default {
   components: {
     ProductCard,
@@ -555,6 +556,9 @@ export default {
     padding-top: 100px;
 
     background: rgba(64, 184, 131, 0.1);
+    #new-button-container {
+      display: none;
+    }
     #tabMenu-container {
       width: 90%;
       display: flex;
@@ -640,6 +644,32 @@ export default {
       flex-direction: row;
       justify-content: center;
       flex-wrap: wrap;
+    }
+    #other-tab {
+      width: auto;
+      padding: 10px 20px;
+      color: black;
+      border: 1px solid #40b883;
+      border-bottom: transparent;
+      background-color: white;
+      cursor: pointer;
+      margin-left: 30px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    #other-tab.active {
+      color: white;
+      background-color: #40b883;
+      transition: 0.3s;
+    }
+    #other-products {
+      border: 1px solid #40b883;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
     }
     #web-products {
       border: 3px solid rgba(255, 61, 85);
@@ -711,6 +741,9 @@ export default {
     padding-top: 100px;
     padding-bottom: 100px;
     background: rgba(64, 184, 131, 0.1);
+    #new-button-container {
+      display: none;
+    }
     #tabMenu-container {
       width: 90%;
       display: flex;
@@ -796,6 +829,32 @@ export default {
       flex-direction: row;
       justify-content: center;
       flex-wrap: wrap;
+    }
+    #other-tab {
+      width: auto;
+      padding: 10px 20px;
+      color: black;
+      border: 1px solid #40b883;
+      border-bottom: transparent;
+      background-color: white;
+      cursor: pointer;
+      margin-left: 30px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    #other-tab.active {
+      color: white;
+      background-color: #40b883;
+      transition: 0.3s;
+    }
+    #other-products {
+      border: 1px solid #40b883;
+      width: 90%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
     }
     #web-products {
       border: 3px solid rgba(255, 61, 85);

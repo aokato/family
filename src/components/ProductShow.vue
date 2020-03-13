@@ -1,6 +1,7 @@
 <template>
   <div id="product-show">
     <div id="product-show-container">
+      <slot name="theme"></slot>
       <span id="close" @click="close()">×</span>
       <div id="product-show-right-left-container">
         <div id="product-show-container-left">
