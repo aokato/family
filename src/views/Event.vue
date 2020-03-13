@@ -1,10 +1,14 @@
 <template>
-  <div id="event">
-    <span>Eventだよ</span>
-  </div>
+  <Calendar id="event"></Calendar>
 </template>
 <script>
-export default {};
+import Calendar from "@/components/Calendar.vue";
+
+export default {
+  components: {
+    Calendar,
+  },
+};
 </script>
 <style lang="scss" scoped>
 #event {

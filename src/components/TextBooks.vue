@@ -1,5 +1,10 @@
 <template>
-  <div id="textbooks">
+  <div
+    id="textbooks"
+    data-aos="fade-right"
+    data-aos-duration="800"
+    data-aos-once="true"
+  >
     <div id="textbooks-list">
       <div id="course-tab-container">
         <div class="tab" v-bind:class="{ web: web }" @click="webcourse()">

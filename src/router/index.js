@@ -1,8 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Top from "../views/Top.vue";
+import Event_new from "../views/Event_new.vue";
 import Event from "../views/Event.vue";
 import Product from "../views/Products.vue";
+import Show from "../views/Show.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -10,13 +15,34 @@ const routes = [
     path: "/",
     component: Top,
   },
-  {
-    path: "/events",
-    component: Event,
-  },
+
   {
     path: "/products",
     component: Product,
+  },
+  {
+    path: "/texts/:course/:title",
+    component: Show,
+  },
+  {
+    path: "/event_new",
+    name: "event_new",
+    component: Event_new,
+  },
+  {
+    path: "/events",
+    name: "event",
+    component: Event,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register,
   },
 ];
 
