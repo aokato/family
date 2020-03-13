@@ -48,10 +48,17 @@ export default {
   },
   watch: {
     show: function(val) {
+      let image1 = document.getElementById("image");
+      let image2 = document.getElementById("image2");
       if (val === true) {
-        document.getElementById("image2").src = document.getElementById(
-          "image"
-        ).src;
+        image2.src = image1.src;
+
+        if (image2.naturalWidth % image1.naturalHeight == 0) {
+          image2.style.height = 300 + "px";
+          image2.style.width = "auto";
+        } else {
+          image2.style.height = 100 + "%";
+        }
       }
     },
   },
@@ -133,7 +140,9 @@ export default {
           width: 40%;
           height: auto;
           margin-right: 40px;
+          margin-left: 40px;
           padding-top: 40px;
+
           display: flex;
           flex-direction: row;
           justify-content: center;
@@ -141,7 +150,7 @@ export default {
             display: flex;
             flex-direction: row;
             justify-content: center;
-            width: 70%;
+            width: 100%;
 
             img {
               width: 100%;
