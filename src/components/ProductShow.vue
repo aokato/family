@@ -125,15 +125,24 @@ export default {
         cursor: pointer;
       }
       #product-show-right-left-container {
+        width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         #product-show-container-left {
           width: 40%;
           height: auto;
           margin-right: 40px;
           padding-top: 40px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
           .image-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 70%;
+
             img {
               width: 100%;
               height: auto;
