@@ -159,7 +159,7 @@ export default {
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1567933323/n4ydwrf1d667yo3v8g81.png",
           info: "横国の授業と教員を横浜国大生視点から口コミするサイト",
           maker: "尾りょーた",
-
+          course: "Web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -169,7 +169,7 @@ export default {
           info:
             "とあるﾒﾝﾀｰが受講生時代の三ヶ月に作ったものです。。 あれから手は加わってないバージョンです。。 これを見ると、自分もあの頃はもっと未熟だったんだなぁと思います。。。精進精進！🔥",
           maker: "しょーたろー",
-
+          course: "Web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -178,7 +178,7 @@ export default {
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1577097826/pebboxgmrvvzidlurrpf.png",
           info: "大学生の為のカフェ情報発信サイト",
           maker: "しゅん",
-
+          course: "Web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails", "Bootstrap"],
         },
         {
@@ -188,7 +188,7 @@ export default {
           info:
             "東京ディズニーランドにて、楽しくかけがえのない思い出を残していただけるよう、東京ディズニーランドのイベント情報、アトラクションなど施設情報から、チケット、交通アクセスなどをご案内します。",
           maker: "チームラボ",
-
+          course: "Web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -198,7 +198,7 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           maker: "尾りょーた",
-
+          course: "Web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -208,7 +208,7 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           maker: "ゆーた",
-
+          course: "Web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -218,6 +218,7 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           tags: ["美しいグラフィック", "横スク"],
+          course: "Web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -226,7 +227,7 @@ export default {
             "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
-
+          course: "Web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
       ],
@@ -238,7 +239,7 @@ export default {
           info:
             "見つかると追いかけてくるモンスターから逃げる、逃走中のようなゲームです。",
           maker: "尾ゆーた",
-
+          course: "Game",
           langages: ["C#", "Unity"],
         },
         {
@@ -248,7 +249,7 @@ export default {
           info:
             "Unityちゃんの夢の世界を旅する横スクロール×シューティングゲーム",
           maker: "匿名さん",
-
+          course: "Game",
           langages: ["C#", "Unity"],
         },
         {
@@ -258,7 +259,7 @@ export default {
           info:
             "次々と現れる障害物を避けよう！ クッキーをゲットしてボーナスポイントを貰いながら高得点を目指そう！",
           maker: "こもり",
-
+          course: "Game",
           langages: ["C#", "Unity"],
         },
         {
@@ -268,7 +269,7 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           maker: "USJ管理人",
-
+          course: "Game",
           langages: ["C#", "Unity"],
         },
       ],

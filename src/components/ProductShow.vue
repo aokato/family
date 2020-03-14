@@ -16,6 +16,9 @@
           <div id="title-container">
             <span>{{ which_product.name }}</span>
           </div>
+          <div id="course-container">
+            {{ which_product.course }}
+          </div>
           <div id="product-show-maker">
             <span id="maker-title">developer：</span>
             <span>{{ which_product.maker }}</span>
