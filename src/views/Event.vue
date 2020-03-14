@@ -11,10 +11,10 @@
             alt=""
           />
           <div class="card-content">
-            <h1 class="card-title">{{ event.description }}</h1>
+            <h1 class="card-title">{{ event.title }}</h1>
             <p>日時：{{ event.date | moment }}</p>
             <p class="card-text">
-              このあとイベント説明用のフィールドを追加して表示させるよん
+              {{ event.description }}
             </p>
           </div>
           <div class="card-link">
@@ -31,10 +31,10 @@
         @before-open="beforeOpen"
       >
         <div class="modal-header">
-          <h2>{{ modal_data.description }}</h2>
+          <h2>{{ modal_data.title }}</h2>
         </div>
         <div class="modal-body">
-          <p>このあとイベント説明用のフィールドを追加して表示させるよん</p>
+          <p>{{ modal_data.description }}</p>
           <button v-on:click="hide">閉じる</button>
         </div>
       </modal>
@@ -120,7 +120,7 @@ h1:after {
 .card_container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0 10%;
 }
 
