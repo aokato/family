@@ -1,10 +1,16 @@
 <template>
   <div id="product-show">
     <div id="product-show-container">
+      <slot name="theme"></slot>
       <span id="close" @click="close()">×</span>
       <div id="product-show-right-left-container">
         <div id="product-show-container-left">
-          <img id="image" :src="which_product.image" />
+          <div class="image-container" v-if="post == false">
+            <img id="image1" :src="which_product.image" />
+          </div>
+          <div class="image-container" v-else>
+            <img id="image2" src="" />
+          </div>
         </div>
         <div id="product-show-container-right">
           <div id="title-container">
@@ -33,16 +39,56 @@ export default {
   props: {
     which_product: Object,
     show: Boolean,
+    post: Boolean,
   },
   data() {
     return {
       menu_show: this.show,
     };
   },
+  watch: {
+    show: function(val) {
+      let image1 = document.getElementById("image");
+      let image2 = document.getElementById("image2");
+      if (val === true) {
+        image2.src = image1.src;
+
+        if (image2.naturalWidth % image1.naturalHeight == 0) {
+          image2.style.height = 300 + "px";
+          image2.style.width = "auto";
+        } else {
+          image2.style.height = 100 + "%";
+        }
+      }
+    },
+  },
+
   methods: {
     close: function() {
       this.menu_show = false;
       this.$emit("update:show", this.menu_show);
+    },
+    test: function() {
+      document.getElementById("image2").src = document.getElementById(
+        "image"
+      ).src;
+      alert("hello");
+    },
+  },
+  filters: {
+    img: function(value) {
+      var file = value;
+      console.dir(file);
+      /* let fileReader = new FileReader();
+      // 読み込み完了時の処理を追加
+      fileReader.onload = function() {
+        const url = this.result;
+        // img要素に表示
+        var img = document.getElementById("image");
+        img.src = url;
+        this.url = file;
+      };
+      fileReader.readAsDataURL(file);*/
     },
   },
 };
@@ -86,17 +132,30 @@ export default {
         cursor: pointer;
       }
       #product-show-right-left-container {
+        width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         #product-show-container-left {
           width: 40%;
           height: auto;
           margin-right: 40px;
+          margin-left: 40px;
           padding-top: 40px;
-          img {
+
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          .image-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
             width: 100%;
-            height: auto;
+
+            img {
+              width: 100%;
+              height: auto;
+            }
           }
         }
         #product-show-container-right {
