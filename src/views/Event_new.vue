@@ -14,6 +14,20 @@
       </section>
 
       <section class="section">
+        <p>イベントタイプを選択</p>
+        <select v-model="selected_event_type">
+          <option disabled value="">イベントタイプを選択してください</option>
+          <option
+            v-for="event_type in event_type"
+            v-bind:key="event_type.value"
+            :value="event_type.value"
+          >
+            {{ event_type.text }}
+          </option>
+        </select>
+      </section>
+
+      <section class="section">
         <p>対象コース</p>
 
         <div class="select_course">
@@ -105,11 +119,16 @@ import VCalendar from "v-calendar";
 Vue.use(VCalendar);
 
 export default {
-  el: "#datepicker",
   data() {
     return {
       title: "",
       description: "",
+      event_type: [
+        { text: "コースイベント ex)GSDC,DamoDayなど", value: "A" },
+        { text: "勉強会系 ex)ゼミやBootCampなど", value: "B" },
+        { text: "遊び系イベント ex)フットサル", value: "C" },
+        { text: "その他", value: "D" },
+      ],
       target_course: ["web", "game", "iphone", "webex"],
       target_term: [
         "1",
@@ -142,6 +161,7 @@ export default {
       ],
       isAllTargetCourse: false,
       isAllTargetTerm: false,
+      selected_event_type: "",
       selected_target_course: [],
       selected_target_term: [],
       mode: "single",
@@ -180,6 +200,7 @@ export default {
       //firebaseにイベント内容をadd
       const params = {
         title: this.title,
+        event_type: this.selected_event_type,
         description: this.description,
         target_course: this.selected_target_course,
         target_term: this.selected_target_term,

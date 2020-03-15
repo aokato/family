@@ -5,11 +5,22 @@
     <div class="card_container">
       <div v-for="(event, index) in event" :key="index">
         <section class="card">
-          <img
-            class="card-img"
-            src="http://webcreatorbox.com/sample/images/bear.jpg"
-            alt=""
-          />
+          <div v-if="event.event_type === 'A'">
+            <img class="card-img" src="@/assets/course_event.jpg" alt="" />
+          </div>
+          <div v-else-if="event.event_type === 'B'">
+            <img class="card-img" src="@/assets/study_event.jpg" alt="" />
+          </div>
+          <div v-else-if="event.event_type === 'C'">
+            <img class="card-img" src="@/assets/futsal_event.jpg" alt="" />
+          </div>
+          <div v-else>
+            <img
+              class="card-img"
+              src="http://webcreatorbox.com/sample/images/bear.jpg"
+              alt=""
+            />
+          </div>
           <div class="card-content">
             <h1 class="card-title">{{ event.title }}</h1>
             <p>日時：{{ event.date | moment }}</p>
