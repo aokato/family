@@ -313,6 +313,9 @@ export default {
       let y = window.pageYOffset + element.top - 80;
       show_component.style.top = y + "px";
       this.which_product = product;
+      let pro = document.getElementById("product-info-box");
+      pro.textContent = product.info;
+
       this.show = true;
     },
 

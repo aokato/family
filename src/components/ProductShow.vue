@@ -35,8 +35,16 @@
           </div>
         </div>
       </div>
-      <div id="product-info-box">{{ which_product.info }}</div>
-      <div id="more"><span @click="more()">more...</span></div>
+
+      <div
+        id="product-info-box"
+        :class="{ pulldown: down, noPulldown: !down }"
+        v-text="which_product.info"
+      ></div>
+
+      <div id="more">
+        <span @click="more()">{{ more_msg }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -50,15 +58,21 @@ export default {
   data() {
     return {
       menu_show: this.show,
+      down: false,
+      more_msg: "more...",
     };
   },
   watch: {
     show: function(val) {
       let image1 = document.getElementById("image");
       let image2 = document.getElementById("image2");
+
       if (val === true) {
         image2.src = image1.src;
-
+        let text = document.getElementById("product-info-box");
+        console.dir(text);
+        let message = document.getElementById("pro-message");
+        console.dir(message);
         if (image2.naturalWidth % image1.naturalHeight == 0) {
           image2.style.height = 300 + "px";
           image2.style.width = "auto";
@@ -71,6 +85,7 @@ export default {
 
   methods: {
     close: function() {
+      this.down = false;
       this.menu_show = false;
       this.$emit("update:show", this.menu_show);
     },
@@ -80,17 +95,15 @@ export default {
       ).src;
     },
     more: function() {
-      let more = document.getElementById("more");
-
-      if (more.textContent == "more...") {
-        let text_box = document.getElementById("product-info-box");
-        console.dir(text_box);
-        text_box.style.backgroundColor = "red";
-        more.textContent = "close";
-      } else if (more.textContent == "close") {
+      if (this.more_msg == "more...") {
+        this.down = true;
+        //text.style.backgroundColor = "red";
+        this.more_msg = "close";
+      } else if (this.more_msg == "close") {
+        this.down = false;
         let text_box = document.getElementById("product-info-box");
         text_box.style.height = 50 + "px";
-        more.textContent = "more...";
+        this.more_msg = "more...";
       }
     },
   },
@@ -501,20 +514,37 @@ export default {
           }
         }
       }
+      .top-enter-active,
+      .top-leave-active {
+        transform: translate(0px, 0px);
+        transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+      }
 
+      .top-enter,
+      .top-leave-to {
+        transform: translateY(-100vh) translateY(0px);
+      }
       #product-info-box {
         width: 80%;
         padding: 10px;
         margin: 30px auto 0 auto;
         font-size: 1rem;
-        height: 50px;
+
         overflow: hidden;
+      }
+      .noPulldown {
+        height: 30px;
+      }
+      .pulldown {
+        height: auto;
       }
       #more {
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+        font-size: 1rem;
+        padding-right: 30px;
       }
     }
   }
