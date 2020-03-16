@@ -38,11 +38,20 @@
             />
           </div>
           <div id="product-post-course">
-            <span id="web-course-select" @click="course('web')">Web</span>
-            <span id="game-course-select" @click="course('game')">Game</span>
-            <span id="ios-course-select" @click="course('ios')">iOS</span>
-            <span id="webex-course-select" @click="course('webex')">WebEx</span>
-            <span id="other-course-select" @click="course('other')">Other</span>
+            <div id="choose-course">
+              コースを選択
+            </div>
+            <span id="web-course-select" @click="course_func('web')">Web</span>
+            <span id="game-course-select" @click="course_func('game')"
+              >Game</span
+            >
+            <span id="ios-course-select" @click="course_func('ios')">iOS</span>
+            <span id="webex-course-select" @click="course_func('webex')"
+              >WebEx</span
+            >
+            <span id="other-course-select" @click="course_func('other')"
+              >Other</span
+            >
           </div>
           <div id="product-post-lang">
             <div id="lang-title">
@@ -118,6 +127,7 @@ export default {
       confirm_show: false,
       product_name: "",
       developer: "",
+      course: "",
       langages: [],
       text: "",
       url: null,
@@ -180,7 +190,7 @@ export default {
       };
       fileReader.readAsDataURL(file);
     },
-    course: function(value) {
+    course_func: function(value) {
       let web = document.getElementById("web-course-select");
       let game = document.getElementById("game-course-select");
       let ios = document.getElementById("ios-course-select");
@@ -275,6 +285,7 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
+
       #close {
         position: absolute;
         top: -50px;
@@ -440,6 +451,10 @@ export default {
               cursor: pointer;
               margin-right: 20px;
               border-radius: 10px;
+            }
+            #choose-course {
+              font-size: 1.2rem;
+              margin: 20px 0;
             }
             #web-course-select {
               border: 1px solid rgba(255, 61, 85);

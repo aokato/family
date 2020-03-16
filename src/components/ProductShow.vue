@@ -17,7 +17,9 @@
             <span>{{ which_product.name }}</span>
           </div>
           <div id="course-container">
-            {{ which_product.course }}
+            <span :id="which_product.course + '-box'">{{
+              which_product.course
+            }}</span>
           </div>
           <div id="product-show-maker">
             <span id="maker-title">developer：</span>
@@ -33,7 +35,8 @@
           </div>
         </div>
       </div>
-      <div id="product-info-container">{{ which_product.info }}</div>
+      <div id="product-info-box">{{ which_product.info }}</div>
+      <div id="more"><span @click="more()">more...</span></div>
     </div>
   </div>
 </template>
@@ -75,7 +78,20 @@ export default {
       document.getElementById("image2").src = document.getElementById(
         "image"
       ).src;
-      alert("hello");
+    },
+    more: function() {
+      let more = document.getElementById("more");
+
+      if (more.textContent == "more...") {
+        let text_box = document.getElementById("product-info-box");
+        console.dir(text_box);
+        text_box.style.backgroundColor = "red";
+        more.textContent = "close";
+      } else if (more.textContent == "close") {
+        let text_box = document.getElementById("product-info-box");
+        text_box.style.height = 50 + "px";
+        more.textContent = "more...";
+      }
     },
   },
   filters: {
@@ -177,6 +193,34 @@ export default {
               padding-bottom: 10px;
             }
           }
+          #course-container {
+            margin-top: 20px;
+            span {
+              display: inline-block;
+              padding: 5px 15px;
+              border: none;
+              cursor: pointer;
+              margin-right: 20px;
+              border-radius: 10px;
+              font-size: 1.2rem;
+            }
+            #web-box {
+              background: rgba(255, 61, 85);
+            }
+            #game-box {
+              background: #4a78ff;
+            }
+            #ios-box {
+              background: #ff8546;
+            }
+            #webex-box {
+              background: #e4c308;
+            }
+            #other-box {
+              background: #40b883;
+            }
+          }
+
           #product-show-lang {
             #lang-title {
               font-size: 1.2rem;
@@ -206,12 +250,15 @@ export default {
         }
       }
 
-      #product-info-container {
+      #product-info-box {
         width: 80%;
         padding: 10px;
         margin: 60px auto 0 auto;
         font-size: 1.3rem;
         line-height: 40px;
+      }
+      #more {
+        display: none;
       }
     }
   }
@@ -298,12 +345,15 @@ export default {
             padding-top: 20px;
           }
         }
-        #product-info-container {
+        #product-info-box {
           width: 100%;
           padding: 10px;
           margin-top: 20px;
           margin-bottom: 40px;
           font-size: 1.4rem;
+        }
+        #more {
+          display: none;
         }
       }
     }
@@ -315,30 +365,29 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 100vh;
 
     #product-show-container {
-      width: 80%;
-
+      width: 95%;
       background-color: rgba(255, 255, 255, 1);
       padding: 40px;
       margin-top: 70px;
       margin-bottom: 70px;
       border-radius: 20px;
       display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
+      flex-direction: column;
+      align-items: center;
       position: relative;
+      box-sizing: border-box;
       #close {
         position: absolute;
-        top: -50px;
-        right: -50px;
-        color: white;
+        top: -10px;
+        right: 10px;
+        color: black;
         border: none;
         border-radius: 50%;
         display: flex;
-        flex-direction: row;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
         align-items: center;
         display: inline-block;
         font-size: 60px;
@@ -347,56 +396,125 @@ export default {
       #close:hover {
         cursor: pointer;
       }
-      #product-show-container-left {
-        width: 40%;
-        height: auto;
-        margin-right: 40px;
-        padding-top: 40px;
-        img {
+      #product-show-right-left-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        #product-show-container-left {
           width: 100%;
           height: auto;
+          padding-top: 40px;
+          display: flex;
+          flex-direction: column;
+
+          .image-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
         }
-      }
-      #product-show-container-right {
-        width: 50%;
-        #title-container {
+        #product-show-container-right {
           width: 100%;
           display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-          margin-top: 30px;
+          flex-direction: column;
+          align-items: center;
+          #title-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
 
-          span {
-            display: inline-block;
-            font-size: 2.5rem;
-            border-bottom: 2px dashed rgba(64, 184, 131, 0.5);
-            padding-bottom: 10px;
+            span {
+              display: inline-block;
+              font-size: 1.3rem;
+              border-bottom: 2px dashed rgba(64, 184, 131, 0.5);
+              padding-bottom: 10px;
+            }
+          }
+          #course-container {
+            margin-top: 20px;
+            span {
+              display: inline-block;
+              padding: 5px 15px;
+              border: none;
+              cursor: pointer;
+              margin-right: 20px;
+              border-radius: 10px;
+              font-size: 1.2rem;
+            }
+            #web-box {
+              background: rgba(255, 61, 85);
+            }
+            #game-box {
+              background: #4a78ff;
+            }
+            #ios-box {
+              background: #ff8546;
+            }
+            #webex-box {
+              background: #e4c308;
+            }
+            #other-box {
+              background: #40b883;
+            }
+          }
+
+          #product-show-lang {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: wrap;
+            #lang-title {
+              font-size: 1.2rem;
+              margin: 20px 0;
+              display: block;
+              width: 100%;
+            }
+            span {
+              display: inline-block;
+              padding: 5px 10px;
+              background: rgba(0, 0, 0, 0.1);
+              font-size: 0.8rem;
+              margin-right: 8px;
+              margin-bottom: 8px;
+              border-radius: 5px;
+            }
+          }
+          #product-show-maker {
+            #maker-title {
+              font-size: 1.2rem;
+              margin: 20px 0;
+            }
+            span {
+              display: inline-block;
+
+              font-size: 1rem;
+            }
           }
         }
-        #product-show-lang {
-          #lang-title {
-            font-size: 1.3rem;
-          }
-          span {
-            display: inline-block;
-            padding: 5px 10px;
-            background: rgba(0, 0, 0, 0.2);
-          }
-        }
-        #product-show-maker {
-          span {
-            display: inline-block;
-            font-size: 1rem;
-            padding-left: 10px;
-            padding-top: 20px;
-          }
-        }
-        #product-info-container {
-          width: 100%;
-          padding: 10px;
-          margin-top: 20px;
-          font-size: 1.4rem;
-        }
+      }
+
+      #product-info-box {
+        width: 80%;
+        padding: 10px;
+        margin: 30px auto 0 auto;
+        font-size: 1rem;
+        height: 50px;
+        overflow: hidden;
+      }
+      #more {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
       }
     }
   }

@@ -159,7 +159,7 @@ export default {
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1567933323/n4ydwrf1d667yo3v8g81.png",
           info: "横国の授業と教員を横浜国大生視点から口コミするサイト",
           maker: "尾りょーた",
-          course: "Web",
+          course: "web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -169,7 +169,7 @@ export default {
           info:
             "とあるﾒﾝﾀｰが受講生時代の三ヶ月に作ったものです。。 あれから手は加わってないバージョンです。。 これを見ると、自分もあの頃はもっと未熟だったんだなぁと思います。。。精進精進！🔥",
           maker: "しょーたろー",
-          course: "Web",
+          course: "web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -178,7 +178,7 @@ export default {
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1577097826/pebboxgmrvvzidlurrpf.png",
           info: "大学生の為のカフェ情報発信サイト",
           maker: "しゅん",
-          course: "Web",
+          course: "web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails", "Bootstrap"],
         },
         {
@@ -188,7 +188,7 @@ export default {
           info:
             "東京ディズニーランドにて、楽しくかけがえのない思い出を残していただけるよう、東京ディズニーランドのイベント情報、アトラクションなど施設情報から、チケット、交通アクセスなどをご案内します。",
           maker: "チームラボ",
-          course: "Web",
+          course: "web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -208,7 +208,7 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           maker: "ゆーた",
-          course: "Web",
+          course: "web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -218,7 +218,7 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           tags: ["美しいグラフィック", "横スク"],
-          course: "Web",
+          course: "web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
         {
@@ -227,7 +227,7 @@ export default {
             "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
-          course: "Web",
+          course: "web",
           langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
         },
       ],
@@ -239,7 +239,7 @@ export default {
           info:
             "見つかると追いかけてくるモンスターから逃げる、逃走中のようなゲームです。",
           maker: "尾ゆーた",
-          course: "Game",
+          course: "game",
           langages: ["C#", "Unity"],
         },
         {
@@ -249,7 +249,7 @@ export default {
           info:
             "Unityちゃんの夢の世界を旅する横スクロール×シューティングゲーム",
           maker: "匿名さん",
-          course: "Game",
+          course: "game",
           langages: ["C#", "Unity"],
         },
         {
@@ -259,7 +259,7 @@ export default {
           info:
             "次々と現れる障害物を避けよう！ クッキーをゲットしてボーナスポイントを貰いながら高得点を目指そう！",
           maker: "こもり",
-          course: "Game",
+          course: "game",
           langages: ["C#", "Unity"],
         },
         {
@@ -269,7 +269,7 @@ export default {
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
           maker: "USJ管理人",
-          course: "Game",
+          course: "game",
           langages: ["C#", "Unity"],
         },
       ],
@@ -309,7 +309,7 @@ export default {
       let element = document.getElementById(id).getBoundingClientRect();
       let to_product_show = document.getElementById("to-product-show");
       let products = document.getElementById("products");
-      to_product_show.style.height = products.scrollHeight + "px";
+      to_product_show.style.height = products.scrollHeight + 120 + "px";
       let y = window.pageYOffset + element.top - 80;
       show_component.style.top = y + "px";
       this.which_product = product;
@@ -739,34 +739,45 @@ export default {
 @media screen and (min-width: 350px) and (max-width: 700px) {
   #products {
     width: 100%;
-    min-height: 100vh;
     padding-top: 100px;
     padding-bottom: 100px;
     background: rgba(64, 184, 131, 0.1);
+    #new-post-cotnainer {
+      display: none;
+    }
+    #title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
     #new-button-container {
       display: none;
     }
     #tabMenu-container {
-      width: 90%;
+      width: 100%;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+      flex-wrap: wrap;
       margin: 0 auto;
+
       #tabMenu {
         padding: 0;
         display: flex;
         list-style-type: none;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
         #web-tab {
           width: auto;
           padding: 10px 20px;
           color: black;
           border: 1px solid rgba(255, 61, 85);
-          border-bottom: transparent;
           background-color: white;
           cursor: pointer;
-          margin-left: 30px;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
+          font-size: 1.3rem;
+          border-radius: 5px;
         }
         #web-tab.active {
           color: white;
@@ -778,12 +789,11 @@ export default {
           padding: 10px 20px;
           color: black;
           border: 1px solid #4a78ff;
-          border-bottom: transparent;
+
           background-color: white;
           cursor: pointer;
-          margin-left: 30px;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
+          font-size: 1.3rem;
+          border-radius: 5px;
         }
         #game-tab.active {
           color: white;
@@ -795,12 +805,11 @@ export default {
           padding: 10px 20px;
           color: black;
           border: 1px solid #ff8546;
-          border-bottom: transparent;
+
           background-color: white;
           cursor: pointer;
-          margin-left: 30px;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
+          font-size: 1.3rem;
+          border-radius: 5px;
         }
         #ios-tab.active {
           color: white;
@@ -812,87 +821,92 @@ export default {
           padding: 10px 20px;
           color: black;
           border: 1px solid #e4c308;
-          border-bottom: transparent;
+
           background-color: white;
           cursor: pointer;
-          margin-left: 30px;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
+          font-size: 1.3rem;
+          border-radius: 5px;
+          margin: 20px 0;
         }
         #webex-tab.active {
           color: white;
           background-color: #e4c308;
           transition: 0.3s;
         }
+        #other-tab {
+          width: auto;
+          padding: 10px 20px;
+          color: black;
+          border: 1px solid #40b883;
+
+          background-color: white;
+          cursor: pointer;
+          font-size: 1.3rem;
+          border-radius: 5px;
+          margin: 20px 0;
+        }
+        #other-tab.active {
+          color: white;
+          background-color: #40b883;
+          transition: 0.3s;
+        }
       }
     }
     .cards-container {
       display: flex;
-      flex-direction: row;
-      justify-content: center;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
-    #other-tab {
-      width: auto;
-      padding: 10px 20px;
-      color: black;
-      border: 1px solid #40b883;
-      border-bottom: transparent;
-      background-color: white;
-      cursor: pointer;
-      margin-left: 30px;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
+    #web-products {
+      border: 1px solid rgba(255, 61, 85);
+      width: 100%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+      box-sizing: border-box;
     }
-    #other-tab.active {
-      color: white;
-      background-color: #40b883;
-      transition: 0.3s;
+    #game-products {
+      border: 1px solid #4a78ff;
+      width: 100%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    #ios-products {
+      border: 1px solid #ff8546;
+      width: 100%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    #webex-products {
+      border: 1px solid #e4c308;
+      width: 100%;
+      min-height: 500px;
+      margin: 0px auto;
+      background: white;
+      box-sizing: border-box;
+      padding: 20px;
+      box-sizing: border-box;
     }
     #other-products {
       border: 1px solid #40b883;
-      width: 90%;
+      width: 100%;
       min-height: 500px;
       margin: 0px auto;
       background: white;
       box-sizing: border-box;
       padding: 20px;
-    }
-    #web-products {
-      border: 3px solid rgba(255, 61, 85);
-      width: 90%;
-      min-height: 500px;
-      margin: 0px auto;
-      background: white;
       box-sizing: border-box;
-      padding: 20px;
-    }
-    #game-products {
-      border: 3px solid #4a78ff;
-      width: 90%;
-      min-height: 500px;
-      margin: 0px auto;
-      background: white;
-      box-sizing: border-box;
-      padding: 20px;
-    }
-    #ios-products {
-      border: 3px solid #ff8546;
-      width: 90%;
-      min-height: 500px;
-      margin: 0px auto;
-      background: white;
-      box-sizing: border-box;
-      padding: 20px;
-    }
-    #webex-products {
-      border: 3px solid #e4c308;
-      width: 90%;
-      min-height: 500px;
-      margin: 0px auto;
-      background: white;
-      box-sizing: border-box;
-      padding: 20px;
     }
     #to-product-show {
       position: absolute;
@@ -906,6 +920,7 @@ export default {
       overflow: hidden;
       background: rgba(0, 0, 0, 0.5);
       padding-bottom: 100px;
+      box-sizing: border-box;
       #show-component {
         position: absolute;
         top: 0;
