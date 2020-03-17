@@ -45,7 +45,8 @@
       <div id="more">
         <span @click="more()">{{ more_msg }}</span>
       </div>
-      <span @click="submit(which_product)">とうこう</span>
+
+      <slot name="post"></slot>
     </div>
   </div>
 </template>

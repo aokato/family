@@ -94,6 +94,11 @@
           <template v-slot:theme>
             <h1 style="text-align:center;">Confirm</h1>
           </template>
+          <template v-slot:post>
+            <div id="product-submit-box">
+              <span @click="submit(which_product)">投稿</span>
+            </div>
+          </template>
         </ProductShow>
       </div>
     </transition>
@@ -261,7 +266,6 @@ export default {
       //  });
     },
     submit: function(get_product) {
-      alert("いいね");
       console.dir(get_product);
       let product = {
         name: get_product.name,
@@ -272,6 +276,8 @@ export default {
       };
       console.dir(product);
       db.collection("propro").add({ product });
+      this.confirm_show = false;
+      this.$emit("update:post_show", this.show);
     },
   },
 };
@@ -521,6 +527,9 @@ export default {
         border-radius: 10px;
         cursor: pointer;
       }
+      button:focus {
+        outline: 0;
+      }
     }
     #confirm-box {
       position: absolute;
@@ -538,6 +547,25 @@ export default {
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+  #product-submit-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 40px;
+    span {
+      display: inline-block;
+      padding: 5px 20px;
+      background: rgba(64, 184, 131, 0.5);
+      border: none;
+      font-size: 1.3rem;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    span:focus {
+      outline: 0;
+    }
   }
 }
 @media screen and (min-width: 700px) and (max-width: 1024px) {
