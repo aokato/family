@@ -45,6 +45,7 @@
       <div id="more">
         <span @click="more()">{{ more_msg }}</span>
       </div>
+      <span @click="submit(which_product)">とうこう</span>
     </div>
   </div>
 </template>
@@ -54,6 +55,7 @@ export default {
     which_product: Object,
     show: Boolean,
     post: Boolean,
+    submit: Function,
   },
   data() {
     return {

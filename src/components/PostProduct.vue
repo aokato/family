@@ -89,6 +89,7 @@
           :show.sync="confirm_show"
           :post="true"
           :which_product="which_product"
+          :submit="submit"
         >
           <template v-slot:theme>
             <h1 style="text-align:center;">Confirm</h1>
@@ -99,8 +100,9 @@
   </div>
 </template>
 <script>
-// import { db } from "@/firebase";
+import { db } from "@/firebase";
 import ProductShow from "@/components/ProductShow.vue";
+
 export default {
   props: {
     post_show: Boolean,
@@ -250,12 +252,26 @@ export default {
         "transparent";
       document.getElementById("confirm-box").style.paddingBottom = 100 + "px";
       this.confirm_show = true;
+
       // db.collection("products").add({
       //   name: this.product_name,
       //  maker: this.developer,
       // langages: this.langages,
       //  info: this.text,
       //  });
+    },
+    submit: function(get_product) {
+      alert("いいね");
+      console.dir(get_product);
+      let product = {
+        name: get_product.name,
+        maker: get_product.maker,
+        course: get_product.course,
+        langages: get_product.langages,
+        info: get_product.info,
+      };
+      console.dir(product);
+      db.collection("propro").add({ product });
     },
   },
 };
