@@ -2,6 +2,8 @@ import Vue from "vue";
 import firebase from "firebase";
 import "firebase/firestore";
 import { firestorePlugin } from "vuefire";
+import "@firebase/auth";
+import store from "./store";
 
 Vue.use(firestorePlugin);
 
@@ -20,3 +22,39 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 export const db = firebase.firestore();
+
+export default {
+  // 初期化
+  init() {
+    // configを読み込んで初期化
+    // firebase.initializeApp(firebaseConfig);
+    // タブを閉じるまで更新されても保持
+    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  },
+  // Googleログインを使ってログイン
+  // login() {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   firebase
+  //     .auth()
+  //     .signInWithPopup(provider)
+  //     .then(result => {
+  //       console.log(result.user);
+  //       router.push("/");
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //       this.errorMessage = error.message;
+  //       this.showError = true;
+  //     });
+  // },
+  // logout() {
+  //   firebase.auth().signOut();
+  // },
+  onAuth() {
+    firebase.auth().onAuthStateChanged(user => {
+      user = user ? user : {};
+      store.commit("setUser", user);
+      store.commit("setSignIn", user.uid ? true : false);
+    });
+  },
+};

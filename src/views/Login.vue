@@ -1,43 +1,63 @@
 <template>
-  <div class="login-main">
-    あああ
-    <input type="text" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
-    <button @click="signUp">サインアップ</button>
+  <div class="login">
+    <button type="button" @click="doLogin">
+      <span>Google ログイン</span>
+    </button>
   </div>
 </template>
+
 <script>
+import router from "@/router/index.js";
 import firebase from "firebase";
-// import db from 'firebase.js'
 
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      errorMessage: "",
+      showError: false,
     };
   },
+  created: function() {
+    // firebase.onAuth();
+  },
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    },
+    userStatus() {
+      return this.$store.getters.isSignedIn;
+    },
+  },
   methods: {
-    signUp: function() {
-      console.log(firebase);
+    doLogin() {
+      const provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .catch(function() {
-          firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-              this.$router.push("/register");
-            } else {
-              this.$router.push("/login");
-            }
-          });
+        .signInWithPopup(provider)
+        .then(result => {
+          console.log(result);
+          let user = {};
+          user = result ? result.user : {};
+          this.$store.commit("setUser", user);
+          this.$store.commit(
+            "setStatus",
+            result.user.emailVerified ? true : false
+          );
+          console.log(result.user.emailVerified);
+          router.push("/");
+        })
+        .catch(error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.showError = true;
         });
     },
   },
 };
 </script>
-<style scoped>
-.login-main {
-  margin-top: 100px;
+
+<style>
+.login {
+  margin-top: 300px;
 }
 </style>

@@ -20,6 +20,9 @@
         Products
       </div>
     </router-link>
+    <div class="header-component">
+      <a @click="doLogout">Logout</a>
+    </div>
     <span
       class="menu-trigger slide"
       :class="{ active: isActive }"
@@ -47,11 +50,41 @@
   </header>
 </template>
 <script>
+import firebase from "firebase";
+import router from "@/router/index.js";
+
 export default {
   data() {
     return {
       isActive: false,
+      errorMessage: "",
+      showError: false,
     };
+  },
+  methods: {
+    doLogout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(result => {
+          console.log(result);
+          let user = {};
+          user = result ? result.user : {};
+          console.log(user);
+          this.$store.commit("destroyUser", user);
+          this.$store.commit(
+            "destroyStatus",
+            (this.$store.state.status = false)
+          );
+
+          router.push("/login");
+        })
+        .catch(error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.showError = true;
+        });
+    },
   },
 };
 </script>

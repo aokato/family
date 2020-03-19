@@ -7,6 +7,8 @@ import Product from "../views/Products.vue";
 import Show from "../views/Show.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import store from "@/store";
+// import firebase from "@/firebase";
 
 Vue.use(VueRouter);
 
@@ -53,3 +55,20 @@ const router = new VueRouter({
 });
 
 export default router;
+
+router.beforeResolve((to, from, next) => {
+  if (to.path == "/login") {
+    next();
+  } else {
+    // const x = this.$store.state.status;
+    console.log(store.state.status);
+    if (store.state.status === true) {
+      console.log("認証中");
+      // router.go("/");
+      next();
+    } else {
+      console.log("未認証");
+      next({ path: "/login" });
+    }
+  }
+});
