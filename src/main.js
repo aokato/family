@@ -4,11 +4,8 @@ import router from "./router";
 import axios from "axios"; //追記
 import VueAxios from "vue-axios"; //追記
 import AOS from "aos";
-import firebase from "./firebase";
+// import db from "./firebase";
 import store from "./store";
-
-// firebaseを初期化
-firebase.init();
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);

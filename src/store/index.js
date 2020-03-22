@@ -1,33 +1,42 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import firebase from "firebase";
+import createPersistedState from "vuex-persistedstate";
+
+// import db from "@/firebase";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-    user: {},
-    status: false,
-  },
+const initialState = {
+  publicUser: {},
+  privateUser: {},
+  currentUser: null,
+};
+
+const store = new Vuex.Store({
+  state: initialState,
+
   mutations: {
-    setUser(state, user) {
-      state.user = user; //firebaseが返したユーザー情報
+    setPublicUser(state, publicUser) {
+      state.publicUser = publicUser;
     },
-    setStatus(state, status) {
-      state.status = status; //ログインしてるかどうか true or false
-    },
-    destroyUser(state, user) {
-      state.user = user;
-    },
-    destroyStatus(state, status) {
-      state.status = status;
+    setCurrentUser(state, currentUser) {
+      state.currentUser = currentUser;
     },
   },
   getters: {
-    user(state) {
-      return state.user;
+    isVerified(state) {
+      return state.publicUser.emailVerified;
     },
-    isSignedIn(state) {
-      return state.status;
+    userStatus(state) {
+      return state.publicUser.status;
     },
   },
+  plugins: [createPersistedState()],
 });
+
+firebase.auth().onAuthStateChanged(currentUser => {
+  store.commit("setCurrentUser", currentUser);
+});
+
+export default store;

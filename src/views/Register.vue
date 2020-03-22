@@ -1,3 +1,10 @@
 <template>
-  <div>ユーザー登録ページ</div>
+  <!-- ユーザー新規登録ページ -->
+  <div class="main-register">
+    <input type="text" />
+  </div>
 </template>
+
+<script>
+export default {};
+</script>

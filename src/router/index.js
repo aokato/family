@@ -8,22 +8,25 @@ import Show from "../views/Show.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import store from "@/store";
-// import firebase from "@/firebase";
+import { db } from "@/firebase";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
+    name: "top",
     component: Top,
   },
 
   {
     path: "/products",
+    name: "products",
     component: Product,
   },
   {
     path: "/texts/:course/:title",
+    name: "show",
     component: Show,
   },
   {
@@ -56,19 +59,44 @@ const router = new VueRouter({
 
 export default router;
 
-router.beforeResolve((to, from, next) => {
-  if (to.path == "/login") {
+router.beforeEach((to, from, next) => {
+  if (to.path === "/login" || to.path === "/") {
     next();
   } else {
-    // const x = this.$store.state.status;
-    console.log(store.state.status);
-    if (store.state.status === true) {
-      console.log("認証中");
-      // router.go("/");
-      next();
-    } else {
-      console.log("未認証");
+    if (!store.state.currentUser) {
+      console.log(store.state.currentUser);
       next({ path: "/login" });
+    } else {
+      if (store.state.publicUser.length !== 0) {
+        if (
+          store.state.publicUser.status !== "none" &&
+          store.state.publicUser.status !== "unApproved"
+        ) {
+          next();
+        } else {
+          next({ path: "/" });
+        }
+      } else {
+        db.collection("public-users")
+          .doc(store.state.currentUser.uid)
+          .get()
+          .then(doc => {
+            const publicUser = {
+              id: doc.id,
+              ...doc.data(),
+            };
+            store.commit("setPublicUser", publicUser);
+            console.log("はいったよん");
+            if (
+              store.state.publicUser.status !== "none" &&
+              store.state.publicUser.status !== "unApproved"
+            ) {
+              next();
+            } else {
+              next({ path: "/" });
+            }
+          });
+      }
     }
   }
 });

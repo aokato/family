@@ -68,15 +68,7 @@ export default {
         .signOut()
         .then(result => {
           console.log(result);
-          let user = {};
-          user = result ? result.user : {};
-          console.log(user);
-          this.$store.commit("destroyUser", user);
-          this.$store.commit(
-            "destroyStatus",
-            (this.$store.state.status = false)
-          );
-
+          this.$store.commit("setPublicUser", {});
           router.push("/login");
         })
         .catch(error => {
