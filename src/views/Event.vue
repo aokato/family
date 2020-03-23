@@ -21,9 +21,10 @@
               alt=""
             />
           </div>
+
           <div class="card-content">
             <h1 class="card-title">{{ event.title }}</h1>
-            <p>日時：{{ event.date | moment }}</p>
+            <p>日時：{{ event.date }}</p>
             <p class="card-text">
               {{ event.description }}
             </p>

@@ -76,18 +76,10 @@
       <section class="section">
         <p>開催日</p>
 
-        <div id="datepicker">
-          <v-date-picker
-            :input-props="{
-              class: 'input',
-              name: 'event_dates',
-              placeholder: '日付を選択',
-            }"
-            :mode="mode"
-            :formats="formats"
-            v-model="selectedDate"
-          ></v-date-picker>
+        <div>
+          <VueCtkDateTimePicker v-model="selectedDate" />
         </div>
+        {{ selectedDate }}
       </section>
 
       <section class="section">
@@ -113,12 +105,15 @@
 import Vue from "vue";
 import router from "@/router";
 import { db } from "@/firebase";
-
+import VueCtkDateTimePicker from "vue-ctk-date-time-picker";
+import "vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css";
 import VCalendar from "v-calendar";
 
 Vue.use(VCalendar);
+Vue.component("VueCtkDateTimePicker", VueCtkDateTimePicker);
 
 export default {
+  el: "#app",
   data() {
     return {
       title: "",
@@ -164,10 +159,10 @@ export default {
       selected_event_type: "",
       selected_target_course: [],
       selected_target_term: [],
-      mode: "single",
-      formats: {
-        input: ["YYYY-MM-DD"],
-      },
+      //   mode: "single",
+      //   formats: {
+      //     input: ["YYYY-MM-DD"],
+      //   },
       selectedDate: null,
     };
   },
