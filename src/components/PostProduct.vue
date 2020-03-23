@@ -37,6 +37,22 @@
               placeholder="開発者名・チーム名を入力"
             />
           </div>
+          <div id="product-post-course">
+            <div id="choose-course">
+              コースを選択
+            </div>
+            <span id="web-course-select" @click="course_func('web')">Web</span>
+            <span id="game-course-select" @click="course_func('game')"
+              >Game</span
+            >
+            <span id="ios-course-select" @click="course_func('ios')">iOS</span>
+            <span id="webex-course-select" @click="course_func('webex')"
+              >WebEx</span
+            >
+            <span id="other-course-select" @click="course_func('other')"
+              >Other</span
+            >
+          </div>
           <div id="product-post-lang">
             <div id="lang-title">
               使用言語・フレームワーク
@@ -73,6 +89,7 @@
           :show.sync="confirm_show"
           :post="true"
           :which_product="which_product"
+          :submit="submit"
         >
           <template v-slot:theme>
             <h1 style="text-align:center;">Confirm</h1>
@@ -83,8 +100,9 @@
   </div>
 </template>
 <script>
-// import { db } from "@/firebase";
+import { db } from "@/firebase";
 import ProductShow from "@/components/ProductShow.vue";
+
 export default {
   props: {
     post_show: Boolean,
@@ -111,6 +129,7 @@ export default {
       confirm_show: false,
       product_name: "",
       developer: "",
+      course: "",
       langages: [],
       text: "",
       url: null,
@@ -173,11 +192,55 @@ export default {
       };
       fileReader.readAsDataURL(file);
     },
+    course_func: function(value) {
+      let web = document.getElementById("web-course-select");
+      let game = document.getElementById("game-course-select");
+      let ios = document.getElementById("ios-course-select");
+      let webex = document.getElementById("webex-course-select");
+      let other = document.getElementById("other-course-select");
+      if (value == "web") {
+        web.style.backgroundColor = "rgba(255, 61, 85)";
+        game.style.backgroundColor = "rgba(255,255,255,0.5)";
+        ios.style.backgroundColor = "rgba(255,255,255,0.5)";
+        webex.style.backgroundColor = "rgba(255,255,255,0.5)";
+        other.style.backgroundColor = "rgba(255,255,255,0.5)";
+        this.course = "web";
+      } else if (value == "game") {
+        web.style.backgroundColor = "rgba(255,255,255,0.5)";
+        game.style.backgroundColor = "#4a78ff";
+        ios.style.backgroundColor = "rgba(255,255,255,0.5)";
+        webex.style.backgroundColor = "rgba(255,255,255,0.5)";
+        other.style.backgroundColor = "rgba(255,255,255,0.5)";
+        this.course = "game";
+      } else if (value == "ios") {
+        web.style.backgroundColor = "rgba(255,255,255,0.5)";
+        game.style.backgroundColor = "rgba(255,255,255,0.5)";
+        ios.style.backgroundColor = "#ff8546";
+        webex.style.backgroundColor = "rgba(255,255,255,0.5)";
+        other.style.backgroundColor = "rgba(255,255,255,0.5)";
+        this.course = "ios";
+      } else if (value == "webex") {
+        web.style.backgroundColor = "rgba(255,255,255,0.5)";
+        game.style.backgroundColor = "rgba(255,255,255,0.5)";
+        ios.style.backgroundColor = "rgba(255,255,255,0.5)";
+        webex.style.backgroundColor = "#e4c308";
+        other.style.backgroundColor = "rgba(255,255,255,0.5)";
+        this.course = "webex";
+      } else if (value == "other") {
+        web.style.backgroundColor = "rgba(255,255,255,0.5)";
+        game.style.backgroundColor = "rgba(255,255,255,0.5)";
+        ios.style.backgroundColor = "rgba(255,255,255,0.5)";
+        webex.style.backgroundColor = "rgba(255,255,255,0.5)";
+        other.style.backgroundColor = "#40b883";
+        this.course = "other";
+      }
+    },
     post: function() {
       let product = {
         image: this.url,
         name: this.product_name,
         maker: this.developer,
+        course: this.course,
         langages: this.langages,
         info: this.text,
       };
@@ -189,12 +252,26 @@ export default {
         "transparent";
       document.getElementById("confirm-box").style.paddingBottom = 100 + "px";
       this.confirm_show = true;
+
       // db.collection("products").add({
       //   name: this.product_name,
       //  maker: this.developer,
       // langages: this.langages,
       //  info: this.text,
       //  });
+    },
+    submit: function(get_product) {
+      alert("いいね");
+      console.dir(get_product);
+      let product = {
+        name: get_product.name,
+        maker: get_product.maker,
+        course: get_product.course,
+        langages: get_product.langages,
+        info: get_product.info,
+      };
+      console.dir(product);
+      db.collection("propro").add({ product });
     },
   },
 };
@@ -218,12 +295,13 @@ export default {
       margin-top: 70px;
 
       border-radius: 20px;
-      max-height: 1000px;
+      max-height: 1150px;
 
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
+
       #close {
         position: absolute;
         top: -50px;
@@ -378,6 +456,36 @@ export default {
               margin-top: 30px;
               padding: 5px 10px;
               font-size: 1.4rem;
+            }
+          }
+          #product-post-course {
+            padding: 30px 0 20px 0;
+            span {
+              display: inline-block;
+              padding: 8px 20px;
+              border: none;
+              cursor: pointer;
+              margin-right: 20px;
+              border-radius: 10px;
+            }
+            #choose-course {
+              font-size: 1.2rem;
+              margin: 20px 0;
+            }
+            #web-course-select {
+              border: 1px solid rgba(255, 61, 85);
+            }
+            #game-course-select {
+              border: 1px solid #4a78ff;
+            }
+            #ios-course-select {
+              border: 1px solid #ff8546;
+            }
+            #webex-course-select {
+              border: 1px solid #e4c308;
+            }
+            #other-course-select {
+              border: 1px solid #40b883;
             }
           }
         }

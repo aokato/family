@@ -139,14 +139,17 @@ export default {
 @media screen and (min-width: 350px) and (max-width: 700px) {
   #product-card {
     background: white;
-    width: 350px;
+    width: 100%;
     height: 500px;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    margin: 20px;
+    margin: 20px 0;
     #image-container {
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
 
       img {
         width: 100%;
@@ -174,7 +177,7 @@ export default {
         }
       }
       p {
-        font-size: 0.5rem;
+        font-size: 0.9rem;
       }
     }
   }
