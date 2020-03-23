@@ -109,7 +109,11 @@
             :show.sync="show"
             :post="false"
             :which_product="which_product"
-          ></ProductShow>
+          >
+            <template v-slot:link_button>
+              <a class="link" :href="which_product.url">実物を見る</a>
+            </template>
+          </ProductShow>
         </div>
       </div>
     </transition>
@@ -149,13 +153,22 @@ export default {
   data() {
     return {
       active: 1,
-      which_product: null,
+      which_product: {
+        name: "",
+        url: "",
+        downloadURL: "",
+        info: "",
+        maker: "",
+        course: "",
+        langages: [],
+      },
       show: false,
       post_show: false,
       web_products: [
         {
           name: "横国の森",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1567933323/n4ydwrf1d667yo3v8g81.png",
           info: "横国の授業と教員を横浜国大生視点から口コミするサイト",
           maker: "尾りょーた",
@@ -164,7 +177,8 @@ export default {
         },
         {
           name: "Keio Search",
-          image:
+          url: "https://qiita.com/miyarappo/items/dfd4a2493883e96a1948",
+          downloadURL:
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1579535788/xroikhoxrtmog8e9nt4g.png",
           info:
             "とあるﾒﾝﾀｰが受講生時代の三ヶ月に作ったものです。。 あれから手は加わってないバージョンです。。 これを見ると、自分もあの頃はもっと未熟だったんだなぁと思います。。。精進精進！🔥",
@@ -174,7 +188,8 @@ export default {
         },
         {
           name: "カフェログ",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1577097826/pebboxgmrvvzidlurrpf.png",
           info: "大学生の為のカフェ情報発信サイト",
           maker: "しゅん",
@@ -183,7 +198,8 @@ export default {
         },
         {
           name: "【公式】東京ディズニーランド",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "https://media2.tokyodisneyresort.jp/home/tdl/top/mainL_201910_01.jpg",
           info:
             "東京ディズニーランドにて、楽しくかけがえのない思い出を残していただけるよう、東京ディズニーランドのイベント情報、アトラクションなど施設情報から、チケット、交通アクセスなどをご案内します。",
@@ -193,7 +209,8 @@ export default {
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
@@ -203,7 +220,8 @@ export default {
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
@@ -213,7 +231,8 @@ export default {
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
@@ -223,7 +242,8 @@ export default {
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
@@ -234,7 +254,8 @@ export default {
       game_products: [
         {
           name: "MonsterEscape",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1583845861/iyredtlyxzv2gqpndvzy.png",
           info:
             "見つかると追いかけてくるモンスターから逃げる、逃走中のようなゲームです。",
@@ -244,7 +265,8 @@ export default {
         },
         {
           name: "StrangeDreamTrips",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1575362109/hsr2ghysymwfeygfenww.png",
           info:
             "Unityちゃんの夢の世界を旅する横スクロール×シューティングゲーム",
@@ -254,7 +276,8 @@ export default {
         },
         {
           name: "CatAdventure",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "http://res.cloudinary.com/dyl2mrrok/image/upload/v1571898281/z4oaewiapvzlibobgib8.png",
           info:
             "次々と現れる障害物を避けよう！ クッキーをゲットしてボーナスポイントを貰いながら高得点を目指そう！",
@@ -264,7 +287,8 @@ export default {
         },
         {
           name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          image:
+          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
+          downloadURL:
             "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
           info:
             "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
@@ -276,17 +300,18 @@ export default {
     };
   },
   created() {
-    db.collection("tweets")
+    db.collection("products")
       .get()
       .then(snapshot => {
         snapshot.docs.forEach(doc => {
-          this.tweets.push({
-            id: doc.id,
+          this.game_products.push({
             ...doc.data(),
           });
         });
       });
+    console.dir(this.game_products);
   },
+
   methods: {
     change: function(num) {
       this.active = num;
@@ -306,6 +331,7 @@ export default {
       } else {
         id = "webex-product-" + index;
       }
+
       let element = document.getElementById(id).getBoundingClientRect();
       let to_product_show = document.getElementById("to-product-show");
       let products = document.getElementById("products");
@@ -313,10 +339,7 @@ export default {
       let y = window.pageYOffset + element.top - 80;
       show_component.style.top = y + "px";
       this.which_product = product;
-      let pro = document.getElementById("product-info-box");
-      pro.textContent = product.info;
-
-      this.show = true;
+      setTimeout(this.image_adjust, 1);
     },
 
     clicked_post: function() {
@@ -325,6 +348,19 @@ export default {
       let height = products.scrollHeight;
       post_container.style.height = height + "px";
       this.post_show = true;
+    },
+    image_adjust: function() {
+      let show_image = document.getElementById("image1");
+
+      if (show_image.naturalWidth % show_image.naturalHeight == 0) {
+        show_image.style.height = 250 + "px";
+        show_image.style.width = "auto";
+      } else {
+        show_image.style.width = 100 + "%";
+      }
+      // let pro = document.getElementById("product-info-box");
+      // pro.textContent = product.info;
+      this.show = true;
     },
   },
 };
@@ -542,6 +578,24 @@ export default {
       #show-component {
         position: absolute;
         top: 0;
+        .link {
+          display: inline-block;
+          padding: 0.3em 1em;
+          text-decoration: none;
+          color: #40b883;
+          border: solid 2px #40b883;
+          border-radius: 3px;
+          transition: 0.2s;
+          margin-top: 20px;
+          cursor: pointer;
+          font-size: 1.5rem;
+        }
+
+        .link:hover {
+          background: #40b883;
+          color: white;
+          cursor: pointer;
+        }
       }
     }
 
@@ -564,6 +618,12 @@ export default {
     #new-button-container {
       display: none;
     }
+    #title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
     #tabMenu-container {
       width: 90%;
       display: flex;
@@ -727,6 +787,28 @@ export default {
       #show-component {
         position: absolute;
         top: 0;
+      }
+    }
+    #show-component {
+      position: absolute;
+      top: 0;
+      .link {
+        display: inline-block;
+        padding: 0.3em 1em;
+        text-decoration: none;
+        color: #40b883;
+        border: solid 2px #40b883;
+        border-radius: 3px;
+        transition: 0.2s;
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
+
+      .link:hover {
+        background: #40b883;
+        color: white;
+        cursor: pointer;
       }
     }
 
@@ -929,7 +1011,28 @@ export default {
         top: 0;
       }
     }
+    #show-component {
+      position: absolute;
+      top: 0;
+      .link {
+        display: inline-block;
+        padding: 0.3em 1em;
+        text-decoration: none;
+        color: #40b883;
+        border: solid 2px #40b883;
+        border-radius: 3px;
+        transition: 0.2s;
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
 
+      .link:hover {
+        background: #40b883;
+        color: white;
+        cursor: pointer;
+      }
+    }
     .fade-enter-active,
     .fade-leave-active {
       transition: opacity 0.5s;

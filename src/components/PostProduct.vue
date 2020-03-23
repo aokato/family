@@ -37,6 +37,13 @@
               placeholder="開発者名・チーム名を入力"
             />
           </div>
+          <div id="product-post-url">
+            <input
+              type="text"
+              v-model="product_url"
+              placeholder="プロダクトのURLを入力"
+            />
+          </div>
           <div id="product-post-course">
             <div id="choose-course">
               コースを選択
@@ -107,7 +114,7 @@
 <script>
 import { db } from "@/firebase";
 import ProductShow from "@/components/ProductShow.vue";
-
+import { firestorage } from "@/firebase";
 export default {
   props: {
     post_show: Boolean,
@@ -138,12 +145,16 @@ export default {
       langages: [],
       text: "",
       url: null,
+      product_url: null,
+      file: null,
+      imageName: "",
       which_product: {
         image: null,
         name: null,
         maker: null,
         langages: null,
         info: null,
+        product_url: null,
       },
       tags: [
         "HTML5",
@@ -186,6 +197,8 @@ export default {
     },
     selectedFile: function(event) {
       var file = event.target.files[0];
+      this.file = file;
+      this.imageName = file.name;
       let fileReader = new FileReader();
       // 読み込み完了時の処理を追加
       fileReader.onload = function() {
@@ -242,7 +255,6 @@ export default {
     },
     post: function() {
       let product = {
-        image: this.url,
         name: this.product_name,
         maker: this.developer,
         course: this.course,
@@ -250,7 +262,6 @@ export default {
         info: this.text,
       };
       this.which_product = product;
-      console.log(this.which_product);
       document.getElementById("confirm-box").style.height =
         document.getElementById("products").scrollHeight + "px";
       document.getElementById("new-post-cotnainer").style.backgroundColor =
@@ -266,16 +277,35 @@ export default {
       //  });
     },
     submit: function(get_product) {
-      console.dir(get_product);
-      let product = {
-        name: get_product.name,
-        maker: get_product.maker,
-        course: get_product.course,
-        langages: get_product.langages,
-        info: get_product.info,
-      };
-      console.dir(product);
-      db.collection("propro").add({ product });
+      // ストレージオブジェクト作成
+      // ファイルを適用してファイルアップロード開始
+
+      var storageRef = firestorage.ref();
+      // ファイルのパスを設定
+      var mountainsRef = storageRef.child(`images/${this.imageName}`);
+      mountainsRef.put(this.file).then(snapshot => {
+        snapshot.ref.getDownloadURL().then(downloadURL => {
+          this.imageUrl = downloadURL;
+          let product = {
+            name: get_product.name,
+            maker: get_product.maker,
+            course: get_product.course,
+            langages: get_product.langages,
+            info: get_product.info,
+            downloadURL: this.imageUrl,
+          };
+          db.collection("products").add({ product });
+        });
+      });
+      this.product_name = "";
+      this.developer = "";
+      this.course = "";
+      this.langages = [];
+      this.text = "";
+      this.url = null;
+      this.product_url = null;
+      this.file = null;
+      this.imageName = "";
       this.confirm_show = false;
       this.$emit("update:post_show", this.show);
     },
@@ -386,6 +416,18 @@ export default {
               width: 100%;
               padding: 5px 10px;
               font-size: 1.5rem;
+            }
+          }
+          #product-post-url {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+
+            input[type="text"] {
+              width: 100%;
+              margin-top: 30px;
+              padding: 5px 10px;
+              font-size: 1.4rem;
             }
           }
           #product-post-lang {
@@ -500,7 +542,7 @@ export default {
       #product-info-container {
         width: 80%;
         padding: 10px;
-        margin: 60px auto 0 auto;
+        margin: 0px auto;
         font-size: 1.3rem;
         line-height: 40px;
         textarea {
