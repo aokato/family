@@ -1,8 +1,13 @@
 <template>
-  <div class="login">
-    <button type="button" @click="doLogin">
-      <span>Google ログイン</span>
-    </button>
+  <div class="container">
+    <div class="login-container">
+      <button type="button" @click="doLogin">
+        <span>ログイン</span>
+      </button>
+    </div>
+    <div class="register-link">
+      <router-link to="/register">新規登録の方はこちらから</router-link>
+    </div>
   </div>
 </template>
 
@@ -50,15 +55,28 @@ export default {
                     status: "none",
                     role: "guest",
                   });
+                db.collection("private-users")
+                  .doc(result.user.uid)
+                  .set({
+                    email: result.user.email,
+                  });
                 db.collection("public-users")
                   .doc(result.user.uid)
+                  .get();
+                db.collection("private-users")
+                  .doc(result.user.id)
                   .get()
                   .then(doc => {
                     const publicUser = {
                       id: doc.id,
                       ...doc.data(),
                     };
+                    const privateUser = {
+                      id: doc.id,
+                      ...doc.data(),
+                    };
                     store.commit("setPublicUser", publicUser);
+                    store.commit("setPrivateUser", privateUser);
                     console.log("はいったよん");
                     router.push("/");
                   })
@@ -80,7 +98,7 @@ export default {
 </script>
 
 <style>
-.login {
+.container {
   margin-top: 300px;
 }
 </style>

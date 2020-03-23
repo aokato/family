@@ -20,9 +20,17 @@
         Products
       </div>
     </router-link>
-    <div class="header-component">
-      <a @click="doLogout">Logout</a>
-    </div>
+    <a @click="doLogout" class="mobile-hidden">
+      <div class="header-component">
+        Logout
+      </div>
+    </a>
+    <router-link to="/register" class="mobile-hidden">
+      <div class="header-component">
+        Sign Up
+      </div>
+    </router-link>
+
     <span
       class="menu-trigger slide"
       :class="{ active: isActive }"
@@ -69,6 +77,7 @@ export default {
         .then(result => {
           console.log(result);
           this.$store.commit("setPublicUser", {});
+          this.$store.commit("setPrivateUser", {});
           router.push("/login");
         })
         .catch(error => {

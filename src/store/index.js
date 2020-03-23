@@ -20,6 +20,9 @@ const store = new Vuex.Store({
     setPublicUser(state, publicUser) {
       state.publicUser = publicUser;
     },
+    setPrivateUser(state, privateUser) {
+      state.privateUser = privateUser;
+    },
     setCurrentUser(state, currentUser) {
       state.currentUser = currentUser;
     },

@@ -60,7 +60,7 @@ const router = new VueRouter({
 export default router;
 
 router.beforeEach((to, from, next) => {
-  if (to.path === "/login" || to.path === "/") {
+  if (to.path === "/login" || to.path === "/" || to.path === "/register") {
     next();
   } else {
     if (!store.state.currentUser) {
