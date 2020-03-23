@@ -20,6 +20,17 @@
         Products
       </div>
     </router-link>
+    <a @click="doLogout" class="mobile-hidden">
+      <div class="header-component">
+        Logout
+      </div>
+    </a>
+    <router-link to="/register" class="mobile-hidden">
+      <div class="header-component">
+        Sign Up
+      </div>
+    </router-link>
+
     <span
       class="menu-trigger slide"
       :class="{ active: isActive }"
@@ -47,11 +58,34 @@
   </header>
 </template>
 <script>
+import firebase from "firebase";
+import router from "@/router/index.js";
+
 export default {
   data() {
     return {
       isActive: false,
+      errorMessage: "",
+      showError: false,
     };
+  },
+  methods: {
+    doLogout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(result => {
+          console.log(result);
+          this.$store.commit("setPublicUser", {});
+          this.$store.commit("setPrivateUser", {});
+          router.push("/login");
+        })
+        .catch(error => {
+          console.log(error);
+          this.errorMessage = error.message;
+          this.showError = true;
+        });
+    },
   },
 };
 </script>

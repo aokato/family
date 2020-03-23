@@ -2,6 +2,8 @@ import Vue from "vue";
 import firebase from "firebase";
 import "firebase/firestore";
 import { firestorePlugin } from "vuefire";
+import "@firebase/auth";
+// import store from "./store";
 
 Vue.use(firestorePlugin);
 
@@ -20,3 +22,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 export const db = firebase.firestore();
+
+export const getCurrentUser = () => {
+  return firebase.auth().currentUser;
+};
