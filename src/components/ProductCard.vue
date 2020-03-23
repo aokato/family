@@ -4,7 +4,7 @@
       <img
         :id="course + '-image-' + index"
         v-on:load="load(course, index)"
-        :src="product.image"
+        :src="product.downloadURL"
       />
     </div>
     <div id="info-container">
@@ -103,6 +103,9 @@ export default {
     margin: 20px;
     #image-container {
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
     }
     #info-container {
       padding: 10px;
