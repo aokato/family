@@ -11,17 +11,8 @@ Vue.use(VCalendar);
 
 export default {
   data() {
-    const todos = [
-      {
-        description: "フットサル",
-        isComplete: false,
-        dates: new Date(2020, 2, 27),
-        color: "red",
-      },
-    ];
     return {
-      incId: todos.length,
-      todos,
+      todos: [],
       event: [],
     };
   },
@@ -31,13 +22,26 @@ export default {
 
   computed: {
     attributes() {
+      const events = this.event;
+      events.forEach(event => {
+        const year = event.date.substr(0, 4);
+        const month = event.date.substr(6, 1);
+        const months = month - 1;
+        const date = event.date.substr(8, 2);
+        const post = {
+          description: event.title,
+          isComplete: false,
+          dates: new Date(year, months, date),
+          color: "red",
+        };
+        this.todos.push(post);
+      });
       return [
         {
           key: "today",
           highlight: "blue",
           dates: new Date(),
         },
-
         // Attributes for todos
         ...this.todos.map(todo => ({
           dates: todo.dates,
@@ -51,6 +55,11 @@ export default {
           customData: todo,
         })),
       ];
+    },
+  },
+  methods: {
+    add(post) {
+      this.todos.push(post);
     },
   },
 };
