@@ -40,6 +40,7 @@ export default {
       }
       // let targetbox = course + "-image-container-" + index;
       //   let image_box = document.getElementById(targetbox);
+      console.dir(this.product);
     },
   },
 };

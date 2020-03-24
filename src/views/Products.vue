@@ -55,18 +55,18 @@
 
     <div id="web-products" class="cards-container" v-if="active === 1">
       <div
-        v-for="(product, index) in web_products"
-        :key="product.id"
+        v-for="(web_product, index) in web_products"
+        :key="web_product.id"
         data-aos="fade-top"
         data-aos-duration="1000"
         data-aos-once="true"
       >
         <div
           :id="'web-product-' + index"
-          @click="card_clicked(product, index, 'web')"
+          @click="card_clicked(web_product, index, 'web')"
         >
           <ProductCard
-            :product="product"
+            :product="web_product"
             :index="index"
             :course="'web'"
           ></ProductCard>
@@ -75,18 +75,18 @@
     </div>
     <div id="game-products" class="cards-container" v-else-if="active === 2">
       <div
-        v-for="(product, index) in game_products"
-        :key="product.id"
+        v-for="(game_product, index) in game_products"
+        :key="game_product.id"
         data-aos="fade-top"
         data-aos-duration="1000"
         data-aos-once="true"
       >
         <div
           :id="'game-product-' + index"
-          @click="card_clicked(product, index, 'game')"
+          @click="card_clicked(game_product, index, 'game')"
         >
           <ProductCard
-            :product="product"
+            :product="game_product"
             :index="index"
             :course="'game'"
           ></ProductCard>
@@ -94,13 +94,65 @@
       </div>
     </div>
     <div id="ios-products" class="cards-container" v-else-if="active === 3">
-      コンテンツ3
+      <div
+        v-for="(ios_product, index) in ios_products"
+        :key="ios_product.id"
+        data-aos="fade-top"
+        data-aos-duration="1000"
+        data-aos-once="true"
+      >
+        <div
+          :id="'ios-product-' + index"
+          @click="card_clicked(ios_product, index, 'ios')"
+        >
+          {{ ios_product }}
+          <ProductCard
+            :product="ios_product"
+            :index="index"
+            :course="'ios'"
+          ></ProductCard>
+        </div>
+      </div>
     </div>
     <div id="webex-products" class="cards-container" v-else-if="active === 4">
-      コンテンツ4
+      <div
+        v-for="(webex_product, index) in webex_products"
+        :key="webex_product.id"
+        data-aos="fade-top"
+        data-aos-duration="1000"
+        data-aos-once="true"
+      >
+        <div
+          :id="'webex-product-' + index"
+          @click="card_clicked(webex_product, index, 'game')"
+        >
+          <ProductCard
+            :product="webex_product"
+            :index="index"
+            :course="'webex'"
+          ></ProductCard>
+        </div>
+      </div>
     </div>
     <div id="other-products" class="cards-container" v-else-if="active === 5">
-      コンテンツ4
+      <div
+        v-for="(other_product, index) in other_products"
+        :key="other_product.id"
+        data-aos="fade-top"
+        data-aos-duration="1000"
+        data-aos-once="true"
+      >
+        <div
+          :id="'other-product-' + index"
+          @click="card_clicked(other_product, index, 'other')"
+        >
+          <ProductCard
+            :product="other_product"
+            :index="index"
+            :course="'other'"
+          ></ProductCard>
+        </div>
+      </div>
     </div>
     <transition name="fade">
       <div id="to-product-show" v-show="show">
@@ -164,139 +216,11 @@ export default {
       },
       show: false,
       post_show: false,
-      web_products: [
-        {
-          name: "横国の森",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1567933323/n4ydwrf1d667yo3v8g81.png",
-          info: "横国の授業と教員を横浜国大生視点から口コミするサイト",
-          maker: "尾りょーた",
-          course: "web",
-          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
-        },
-        {
-          name: "Keio Search",
-          url: "https://qiita.com/miyarappo/items/dfd4a2493883e96a1948",
-          downloadURL:
-            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1579535788/xroikhoxrtmog8e9nt4g.png",
-          info:
-            "とあるﾒﾝﾀｰが受講生時代の三ヶ月に作ったものです。。 あれから手は加わってないバージョンです。。 これを見ると、自分もあの頃はもっと未熟だったんだなぁと思います。。。精進精進！🔥",
-          maker: "しょーたろー",
-          course: "web",
-          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
-        },
-        {
-          name: "カフェログ",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1577097826/pebboxgmrvvzidlurrpf.png",
-          info: "大学生の為のカフェ情報発信サイト",
-          maker: "しゅん",
-          course: "web",
-          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails", "Bootstrap"],
-        },
-        {
-          name: "【公式】東京ディズニーランド",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "https://media2.tokyodisneyresort.jp/home/tdl/top/mainL_201910_01.jpg",
-          info:
-            "東京ディズニーランドにて、楽しくかけがえのない思い出を残していただけるよう、東京ディズニーランドのイベント情報、アトラクションなど施設情報から、チケット、交通アクセスなどをご案内します。",
-          maker: "チームラボ",
-          course: "web",
-          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
-        },
-        {
-          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
-          info:
-            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
-          maker: "尾りょーた",
-          course: "Web",
-          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
-        },
-        {
-          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
-          info:
-            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
-          maker: "ゆーた",
-          course: "web",
-          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
-        },
-        {
-          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
-          info:
-            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
-          tags: ["美しいグラフィック", "横スク"],
-          course: "web",
-          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
-        },
-        {
-          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
-          info:
-            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
-          course: "web",
-          langages: ["HTML5", "CSS3", "Ruby", "Ruby on Rails"],
-        },
-      ],
-      game_products: [
-        {
-          name: "MonsterEscape",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1583845861/iyredtlyxzv2gqpndvzy.png",
-          info:
-            "見つかると追いかけてくるモンスターから逃げる、逃走中のようなゲームです。",
-          maker: "尾ゆーた",
-          course: "game",
-          langages: ["C#", "Unity"],
-        },
-        {
-          name: "StrangeDreamTrips",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1575362109/hsr2ghysymwfeygfenww.png",
-          info:
-            "Unityちゃんの夢の世界を旅する横スクロール×シューティングゲーム",
-          maker: "匿名さん",
-          course: "game",
-          langages: ["C#", "Unity"],
-        },
-        {
-          name: "CatAdventure",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "http://res.cloudinary.com/dyl2mrrok/image/upload/v1571898281/z4oaewiapvzlibobgib8.png",
-          info:
-            "次々と現れる障害物を避けよう！ クッキーをゲットしてボーナスポイントを貰いながら高得点を目指そう！",
-          maker: "こもり",
-          course: "game",
-          langages: ["C#", "Unity"],
-        },
-        {
-          name: "ユニバーサル・スタジオ・ジャパン｜USJ",
-          url: "https://jp.vuejs.org/v2/guide/components-slots.html",
-          downloadURL:
-            "https://ぱっさん.com/wp-content/uploads/2019/11/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA_1573555371.jpg",
-          info:
-            "異なる表情を持つさまざまなエリアは、感動がいっぱいの別世界。ハリウッドの超大作映画をテーマにした興奮のライドや人気キャラクターたちのショーなど、子どもから大人まで楽しめる、ワールドクラスのエンターテイメントを集めたテーマパーク。",
-          maker: "USJ管理人",
-          course: "game",
-          langages: ["C#", "Unity"],
-        },
-      ],
+      web_products: [],
+      game_products: [],
+      ios_products: [],
+      webex_product: [],
+      other_products: [],
     };
   },
   created() {
@@ -304,12 +228,33 @@ export default {
       .get()
       .then(snapshot => {
         snapshot.docs.forEach(doc => {
-          this.game_products.push({
-            ...doc.data(),
-          });
+          if (doc.data().product.course == "web") {
+            this.web_products.push({
+              ...doc.data().product,
+            });
+          }
+          if (doc.data().product.course == "game") {
+            this.game_products.push({
+              ...doc.data(),
+            });
+          }
+          if (doc.data().product.course == "ios") {
+            this.ios_products.push({
+              ...doc.data(),
+            });
+          }
+          if (doc.data().product.course == "webex") {
+            this.webex_products.push({
+              ...doc.data(),
+            });
+          }
+          if (doc.data().product.course == "other") {
+            this.other_products.push({
+              ...doc.data(),
+            });
+          }
         });
       });
-    console.dir(this.game_products);
   },
 
   methods: {
@@ -321,15 +266,17 @@ export default {
       //  document.getElementById("products").style.backgroundColor = "transparent";
       let show_component = document.getElementById("show-component");
       let id = null;
-
+      console.dir(product);
       if (langages == "web") {
         id = "web-product-" + index;
       } else if (langages == "game") {
         id = "game-product-" + index;
       } else if (langages == "ios") {
         id = "ios-product-" + index;
-      } else {
+      } else if (langages == "webex") {
         id = "webex-product-" + index;
+      } else {
+        id = "other-product-" + index;
       }
 
       let element = document.getElementById(id).getBoundingClientRect();
