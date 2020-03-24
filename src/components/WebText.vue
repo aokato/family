@@ -2,11 +2,24 @@
   <div id="web-text">
     <div id="page-title" class="ppt ">{{ page_title }}</div>
     <div id="text" v-html="Md"></div>
+    <div id="clear">
+      <button
+        @click="clear()"
+        v-show="clear"
+        data-aos="fade-bottom"
+        data-aos-duration="1100"
+        type="button"
+      >
+        Clear
+      </button>
+    </div>
     <img src="@/assets/not_found.png" v-show="not_found" />
   </div>
 </template>
 
 <script>
+import { db } from "@/firebase";
+import store from "@/store";
 import error404 from "@/assets/markdowns/NotFound.md";
 import web11 from "@/assets/markdowns/web/1-1/1-1.md";
 import web12 from "@/assets/markdowns/web/1-2/1-2.md";
@@ -30,6 +43,7 @@ export default {
   data() {
     return {
       page_title: this.title,
+      clear: true,
       error404: error404,
       not_found: false,
       web11: web11,
@@ -44,6 +58,7 @@ export default {
       web32: web32,
     };
   },
+
   methods: {
     whichtext: function(which_md) {
       switch (which_md) {
@@ -89,6 +104,48 @@ export default {
           break;
       }
     },
+    clear: function() {
+      const current_user = store.state.currentUser;
+      let user_count = db.collection("counts").doc(current_user.uid);
+      const text_id = this.$route.params.text_id;
+      user_count
+        .get()
+        .then(function(doc) {
+          if (doc.exists) {
+            let array = doc.data();
+            // let array2 = Object.keys(array);
+            for (let key in array) {
+              if (key == text_id) {
+                for (let key2 in array[key]) {
+                  if (key2 == "count") {
+                    //alert(array[key][key2]);
+                    let count = Number(array[key][key2]);
+                    count += 1;
+                    const timestamp = new Date();
+                    user_count
+                      .update({
+                        [key]: {
+                          count: count,
+                          timestamp: timestamp,
+                        },
+                      })
+                      .then(function() {
+                        console.log("Document successfully updated!");
+                      });
+                  }
+                }
+              }
+            }
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch(function(error) {
+          console.log("Error getting document:", error);
+        });
+      this.clear = false;
+    },
   },
 };
 </script>
@@ -96,6 +153,7 @@ export default {
 @media screen and (min-width: 1024px) {
   #web-text {
     width: 100%;
+    position: relative;
     .ppt {
       position: relative;
       padding: 2px 48px;
@@ -132,6 +190,27 @@ export default {
     #text {
       padding-left: 40px;
       padding-top: 30px;
+    }
+    #clear {
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      button[type="button"] {
+        display: block;
+        padding: 50px 30px;
+        background: red;
+        color: white;
+        font-size: 2rem;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      button[type="button"]:focus {
+        outline: 0;
+      }
     }
   }
 }

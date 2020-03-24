@@ -25,7 +25,7 @@ const routes = [
     component: Product,
   },
   {
-    path: "/texts/:course/:title",
+    path: "/:text_id/:course/:title",
     name: "show",
     component: Show,
   },
