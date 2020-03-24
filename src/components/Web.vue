@@ -58,51 +58,61 @@ export default {
       links_length: null,
       links: [
         {
+          text_id: "web_1",
           title: "1-1. 3ヶ月の流れ",
           url: "/texts/web/1-1. 3ヶ月の流れ",
           first: "1章 Webコースの基礎",
         },
         {
+          text_id: "web_2",
           title: "1-2. DemoDayについて",
           url: "/texts/web/1-2. DemoDayについて",
           first: false,
         },
         {
+          text_id: "web_3",
           title: "1-3. GSDCについて",
           url: "/texts/web/1-3. GSDCについて",
           first: false,
         },
         {
+          text_id: "web_4",
           title: "1-4. Webコース学習の流れ",
           url: "/texts/web/1-4. Webコース学習の流れ",
           first: false,
         },
         {
+          text_id: "web_5",
           title: "2-1. HTML/CSSの概要",
           url: "/texts/web/2-1. HTML/CSSの概要",
           first: "2章 フロントエンド入門",
         },
         {
+          text_id: "web_6",
           title: "2-2. HTMLの基本",
           url: "/texts/web/2-2. HTMLの基本",
           first: false,
         },
         {
+          text_id: "web_7",
           title: "2-3. CSSの基本",
           url: "/texts/web/2-3. CSSの基本",
           first: false,
         },
         {
+          text_id: "web_8",
           title: "2-4. ホームページの大枠を作ろう！",
           url: "/texts/web/2-4. ホームページの大枠を作ろう！",
           first: false,
         },
         {
+          text_id: "web_9",
           title: "3-1.ターミナル(コマンドプロンプト)の使い方",
           url: "/texts/web/3-1.ターミナル(コマンドプロンプト)の使い方",
           first: "3章 バックエンド",
         },
         {
+          text_id: "web_10",
           title: "3-2.Ruby on Railsとは",
           url: "/texts/web/3-2.Ruby on Railsとは",
           first: false,
