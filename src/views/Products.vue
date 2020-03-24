@@ -55,18 +55,18 @@
 
     <div id="web-products" class="cards-container" v-if="active === 1">
       <div
-        v-for="(web_product, index) in web_products"
-        :key="web_product.id"
+        v-for="(product, index) in web_products"
+        :key="product.id"
         data-aos="fade-top"
         data-aos-duration="1000"
         data-aos-once="true"
       >
         <div
           :id="'web-product-' + index"
-          @click="card_clicked(web_product, index, 'web')"
+          @click="card_clicked(product, index, 'web')"
         >
           <ProductCard
-            :product="web_product"
+            :product="product"
             :index="index"
             :course="'web'"
           ></ProductCard>
@@ -75,18 +75,18 @@
     </div>
     <div id="game-products" class="cards-container" v-else-if="active === 2">
       <div
-        v-for="(game_product, index) in game_products"
-        :key="game_product.id"
+        v-for="(product, index) in game_products"
+        :key="product.id"
         data-aos="fade-top"
         data-aos-duration="1000"
         data-aos-once="true"
       >
         <div
           :id="'game-product-' + index"
-          @click="card_clicked(game_product, index, 'game')"
+          @click="card_clicked(product, index, 'game')"
         >
           <ProductCard
-            :product="game_product"
+            :product="product"
             :index="index"
             :course="'game'"
           ></ProductCard>
@@ -95,19 +95,18 @@
     </div>
     <div id="ios-products" class="cards-container" v-else-if="active === 3">
       <div
-        v-for="(ios_product, index) in ios_products"
-        :key="ios_product.id"
+        v-for="(product, index) in ios_products"
+        :key="product.id"
         data-aos="fade-top"
         data-aos-duration="1000"
         data-aos-once="true"
       >
         <div
           :id="'ios-product-' + index"
-          @click="card_clicked(ios_product, index, 'ios')"
+          @click="card_clicked(product, index, 'ios')"
         >
-          {{ ios_product }}
           <ProductCard
-            :product="ios_product"
+            :product="product"
             :index="index"
             :course="'ios'"
           ></ProductCard>
@@ -116,18 +115,18 @@
     </div>
     <div id="webex-products" class="cards-container" v-else-if="active === 4">
       <div
-        v-for="(webex_product, index) in webex_products"
-        :key="webex_product.id"
+        v-for="(product, index) in webex_products"
+        :key="product.id"
         data-aos="fade-top"
         data-aos-duration="1000"
         data-aos-once="true"
       >
         <div
           :id="'webex-product-' + index"
-          @click="card_clicked(webex_product, index, 'game')"
+          @click="card_clicked(product, index, 'webex')"
         >
           <ProductCard
-            :product="webex_product"
+            :product="product"
             :index="index"
             :course="'webex'"
           ></ProductCard>
@@ -136,18 +135,18 @@
     </div>
     <div id="other-products" class="cards-container" v-else-if="active === 5">
       <div
-        v-for="(other_product, index) in other_products"
-        :key="other_product.id"
+        v-for="(product, index) in other_products"
+        :key="product.id"
         data-aos="fade-top"
         data-aos-duration="1000"
         data-aos-once="true"
       >
         <div
           :id="'other-product-' + index"
-          @click="card_clicked(other_product, index, 'other')"
+          @click="card_clicked(product, index, 'other')"
         >
           <ProductCard
-            :product="other_product"
+            :product="product"
             :index="index"
             :course="'other'"
           ></ProductCard>
@@ -235,22 +234,22 @@ export default {
           }
           if (doc.data().product.course == "game") {
             this.game_products.push({
-              ...doc.data(),
+              ...doc.data().product,
             });
           }
           if (doc.data().product.course == "ios") {
             this.ios_products.push({
-              ...doc.data(),
+              ...doc.data().product,
             });
           }
           if (doc.data().product.course == "webex") {
             this.webex_products.push({
-              ...doc.data(),
+              ...doc.data().product,
             });
           }
           if (doc.data().product.course == "other") {
             this.other_products.push({
-              ...doc.data(),
+              ...doc.data().products,
             });
           }
         });
