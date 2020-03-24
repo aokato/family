@@ -34,6 +34,9 @@ const store = new Vuex.Store({
     userStatus(state) {
       return state.publicUser.status;
     },
+    isCurrentUser(state) {
+      return state.currentUser;
+    },
   },
   plugins: [createPersistedState()],
 });

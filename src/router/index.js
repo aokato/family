@@ -7,6 +7,8 @@ import Product from "../views/Products.vue";
 import Show from "../views/Show.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import Admin from "../views/Admin.vue";
+
 import store from "@/store";
 import { db } from "@/firebase";
 
@@ -48,6 +50,18 @@ const routes = [
     path: "/register",
     name: "register",
     component: Register,
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: Admin,
+    // beforeEnter: (to, from, next) => {
+    //   if (store.state.publicUser.role !== "student") {
+    //     next();
+    //   } else {
+    //     router.push("/");
+    //   }
+    // },
   },
 ];
 

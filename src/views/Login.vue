@@ -5,9 +5,6 @@
         <span>ログイン</span>
       </button>
     </div>
-    <div class="register-link">
-      <router-link to="/register">新規登録の方はこちらから</router-link>
-    </div>
   </div>
 </template>
 
