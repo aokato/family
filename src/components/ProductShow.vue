@@ -23,9 +23,17 @@
                 which_product.course
               }}</span>
             </div>
+
             <span id="maker-title">developer：</span>
             <span>{{ which_product.maker }}</span>
+            <div id="product-url" v-show="post == true">
+              <span>URL：</span
+              ><a :href="which_product.product_url">{{
+                which_product.product_url
+              }}</a>
+            </div>
           </div>
+
           <slot name="link_button"></slot>
 
           <div id="product-show-lang">
@@ -290,6 +298,9 @@ export default {
             span {
               display: inline-block;
               font-size: 1rem;
+            }
+            #product-url {
+              margin-top: 30px;
             }
           }
         }

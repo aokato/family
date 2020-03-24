@@ -260,6 +260,7 @@ export default {
         course: this.course,
         langages: this.langages,
         info: this.text,
+        product_url: this.product_url,
       };
       this.which_product = product;
       document.getElementById("confirm-box").style.height =
@@ -293,6 +294,7 @@ export default {
             langages: get_product.langages,
             info: get_product.info,
             downloadURL: this.imageUrl,
+            url: get_product.product_url,
           };
           db.collection("products").add({ product });
         });
