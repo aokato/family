@@ -20,14 +20,18 @@
         Products
       </div>
     </router-link>
-    <a @click="doLogout" class="mobile-hidden">
+    <a @click="doLogout" class="mobile-hidden" v-if="isCurrentUser !== null">
       <div class="header-component">
         Logout
       </div>
     </a>
-    <router-link to="/register" class="mobile-hidden">
+    <router-link
+      to="/register"
+      class="mobile-hidden"
+      v-if="userStatus === 'none' && isCurrentUser !== null"
+    >
       <div class="header-component">
-        Sign Up
+        初めての人～
       </div>
     </router-link>
 
@@ -60,6 +64,7 @@
 <script>
 import firebase from "firebase";
 import router from "@/router/index.js";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -69,6 +74,7 @@ export default {
       showError: false,
     };
   },
+  computed: mapGetters(["isCurrentUser", "userStatus"]),
   methods: {
     doLogout() {
       firebase
