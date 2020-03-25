@@ -20,7 +20,7 @@
         Products
       </div>
     </router-link>
-    <router-link to="/admin" class="mobile-hidden" v-if="userRole === 'menter'">
+    <router-link to="/admin" class="mobile-hidden" v-if="userRole === 'mentor'">
       <div class="header-component">
         受講生認証
       </div>
