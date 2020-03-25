@@ -5,7 +5,7 @@
     <div id="clear">
       <button
         @click="clear()"
-        v-show="clear"
+        v-show="complete"
         data-aos="fade-bottom"
         data-aos-duration="1100"
         type="button"
@@ -43,9 +43,10 @@ export default {
   data() {
     return {
       page_title: this.title,
-      clear: true,
+      complete: true,
       error404: error404,
       not_found: false,
+      done: false,
       web11: web11,
       web12: web12,
       web13: web13,
@@ -106,45 +107,49 @@ export default {
     },
     clear: function() {
       const current_user = store.state.currentUser;
-      let user_count = db.collection("counts").doc(current_user.uid);
       const text_id = this.$route.params.text_id;
-      user_count
-        .get()
-        .then(function(doc) {
-          if (doc.exists) {
-            let array = doc.data();
-            // let array2 = Object.keys(array);
-            for (let key in array) {
-              if (key == text_id) {
-                for (let key2 in array[key]) {
-                  if (key2 == "count") {
-                    //alert(array[key][key2]);
-                    let count = Number(array[key][key2]);
-                    count += 1;
-                    const timestamp = new Date();
-                    user_count
-                      .update({
-                        [key]: {
-                          count: count,
-                          timestamp: timestamp,
-                        },
-                      })
-                      .then(function() {
-                        console.log("Document successfully updated!");
-                      });
-                  }
-                }
-              }
+      const timestamp = new Date();
+
+      let user_count = db
+        .collection("counts")
+        .doc(current_user.uid)
+        .data();
+      let array = user_count;
+      // let array2 = Object.keys(array);
+      for (let key in array) {
+        if (key == text_id) {
+          for (let key2 in array[key]) {
+            if (key2 == "count") {
+              //alert(array[key][key2]);
+              let count = Number(array[key][key2]);
+              count += 1;
+              user_count
+                .update({
+                  [key]: {
+                    count: count,
+                    timestamp: timestamp,
+                  },
+                })
+                .then(function() {
+                  console.log("Document successfully updated!");
+                });
+              this.done = true;
             }
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
           }
-        })
-        .catch(function(error) {
-          console.log("Error getting document:", error);
+        }
+      }
+      if (this.done == false) {
+        alert("aaaa");
+        user_count.update({
+          [text_id]: {
+            count: 1,
+            timestamp: timestamp,
+          },
         });
-      this.clear = false;
+      }
+
+      this.done = false;
+      this.complete = false;
     },
   },
 };

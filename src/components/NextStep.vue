@@ -2,7 +2,17 @@
   <div id="next-step">あなたが次にやる教材は以下です</div>
 </template>
 <script>
-export default {};
+/*import { Bar } from "vue-chartjs";
+import MainChart from "./MainComponents/MainChart.js";
+export default {
+  extends: Bar,
+  components: {
+    MainChart,
+  },
+  mounted() {
+    this.renderChart(data, options);
+  },
+};*/
 </script>
 <style lang="scss" scoped>
 @media screen and (min-width: 1024px) {
