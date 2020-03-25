@@ -57,7 +57,7 @@ const routes = [
     component: Admin,
     beforeEnter: (to, from, next) => {
       if (
-        store.state.publicUser.role === "menter" &&
+        store.state.publicUser.role === "menter" ||
         store.state.publicUser.role === "manager"
       ) {
         next();
