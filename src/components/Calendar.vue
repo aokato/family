@@ -14,12 +14,12 @@ export default {
     return {
       todos: [],
       event: [],
+      current_user_info: [],
     };
   },
   firestore: {
     event: db.collection("event"),
   },
-
   computed: {
     attributes() {
       const events = this.event;
