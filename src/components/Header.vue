@@ -20,6 +20,21 @@
         Products
       </div>
     </router-link>
+    <router-link to="/admin" class="mobile-hidden" v-if="userRole === 'menter'">
+      <div class="header-component">
+        受講生認証
+      </div>
+    </router-link>
+    <router-link
+      to="/login"
+      class="mobile-hidden"
+      v-if="isCurrentUser === null"
+    >
+      <div class="header-component">
+        ログイン
+      </div>
+    </router-link>
+
     <a @click="doLogout" class="mobile-hidden" v-if="isCurrentUser !== null">
       <div class="header-component">
         Logout
@@ -74,7 +89,7 @@ export default {
       showError: false,
     };
   },
-  computed: mapGetters(["isCurrentUser", "userStatus"]),
+  computed: mapGetters(["isCurrentUser", "userStatus", "userRole"]),
   methods: {
     doLogout() {
       firebase

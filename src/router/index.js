@@ -55,13 +55,16 @@ const routes = [
     path: "/admin",
     name: "admin",
     component: Admin,
-    // beforeEnter: (to, from, next) => {
-    //   if (store.state.publicUser.role !== "student") {
-    //     next();
-    //   } else {
-    //     router.push("/");
-    //   }
-    // },
+    beforeEnter: (to, from, next) => {
+      if (
+        store.state.publicUser.role === "menter" ||
+        store.state.publicUser.role === "manager"
+      ) {
+        next();
+      } else {
+        router.push("/");
+      }
+    },
   },
 ];
 
