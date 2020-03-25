@@ -81,23 +81,30 @@ export default {
       real_event: [],
       event: [],
       modal_data: [],
+      current_uid: [],
+      users: [],
       current_user_info: [],
     };
   },
   firestore: {
-    current_user_info: db
-      .collection("public-users")
-      .doc(store.state.currentUser.uid),
+    users: db.collection("public-users"),
+    //   .doc(store.state.currentUser.uid),
     event: db.collection("event").orderBy("date"),
   },
   watch: {
     event(event) {
+      const current_user_id = store.state.currentUser.uid;
+      this.users.forEach(user => {
+        if (user.id == current_user_id) {
+          this.current_user_info.push(user);
+        }
+      });
       const events = event;
       events.forEach(event => {
         const target_course = event.target_course;
         const target_term = event.target_term;
-        const current_user_course = this.current_user_info.course;
-        const current_user_term = this.current_user_info.term;
+        const current_user_course = this.current_user_info[0].course;
+        const current_user_term = this.current_user_info[0].term;
         if (
           target_course.includes(current_user_course) &&
           target_term.includes(current_user_term)
