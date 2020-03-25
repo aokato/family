@@ -49,7 +49,10 @@
         初めての人～
       </div>
     </router-link>
-
+    <div class="nameIcon">
+      <p class="icon">{{ userIcon }}</p>
+      <p class="hello">さんこんにちは</p>
+    </div>
     <span
       class="menu-trigger slide"
       :class="{ active: isActive }"
@@ -71,6 +74,19 @@
           <router-link to="/products">
             <span @click="isActive = false"> Products</span>
           </router-link>
+          <a @click="doLogout" v-if="isCurrentUser !== null">
+            <span @click="isActive = false">
+              Logout
+            </span>
+          </a>
+          <router-link
+            to="/register"
+            v-if="userStatus === 'none' && isCurrentUser !== null"
+          >
+            <span @click="isActive = false">
+              初めての人～
+            </span>
+          </router-link>
         </div>
       </div>
     </transition>
@@ -87,6 +103,7 @@ export default {
       isActive: false,
       errorMessage: "",
       showError: false,
+      userIcon: this.$store.state.publicUser.name,
     };
   },
   computed: mapGetters(["isCurrentUser", "userStatus", "userRole"]),
@@ -185,6 +202,19 @@ export default {
     }
     .pc-tab-hidden {
       display: none;
+    }
+    .nameIcon {
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    .icon {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      font-weight: 800;
+    }
+    .hello {
+      margin: 0;
+      font-family: monospace;
     }
   }
 }
