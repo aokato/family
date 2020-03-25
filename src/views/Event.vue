@@ -49,7 +49,7 @@
         </div>
         <div class="modal-body">
           <p>{{ modal_data.description }}</p>
-          <button v-on:click="hide">閉じる</button>
+          <!-- <button v-on:click="hide">閉じる</button> -->
         </div>
       </modal>
     </div>
