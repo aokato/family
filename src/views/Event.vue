@@ -1,9 +1,11 @@
 <template>
   <div id="event">
     <Calendar></Calendar>
+    <!-- {{ create_method }} -->
+    <!-- {{ event }} -->
     <h1>直近開催されるイベント</h1>
     <div class="card_container">
-      <div v-for="(event, index) in event" :key="index">
+      <div v-for="(event, index) in real_event" :key="index">
         <section class="card">
           <div v-if="event.event_type === 'A'">
             <img class="card-img" src="@/assets/course_event.jpg" alt="" />
@@ -47,7 +49,7 @@
         </div>
         <div class="modal-body">
           <p>{{ modal_data.description }}</p>
-          <button v-on:click="hide">閉じる</button>
+          <!-- <button v-on:click="hide">閉じる</button> -->
         </div>
       </modal>
     </div>
@@ -58,6 +60,7 @@ import Vue from "vue";
 import { db } from "@/firebase";
 import Calendar from "@/components/Calendar.vue";
 import VModal from "vue-js-modal";
+import store from "@/store";
 import moment from "moment";
 
 Vue.use(VModal);
@@ -75,12 +78,41 @@ export default {
   },
   data() {
     return {
+      real_event: [],
       event: [],
       modal_data: [],
+      current_uid: [],
+      users: [],
+      current_user_info: [],
     };
   },
   firestore: {
+    users: db.collection("public-users"),
+    //   .doc(store.state.currentUser.uid),
     event: db.collection("event").orderBy("date"),
+  },
+  watch: {
+    event(event) {
+      const current_user_id = store.state.currentUser.uid;
+      this.users.forEach(user => {
+        if (user.id == current_user_id) {
+          this.current_user_info.push(user);
+        }
+      });
+      const events = event;
+      events.forEach(event => {
+        const target_course = event.target_course;
+        const target_term = event.target_term;
+        const current_user_course = this.current_user_info[0].course;
+        const current_user_term = this.current_user_info[0].term;
+        if (
+          target_course.includes(current_user_course) &&
+          target_term.includes(current_user_term)
+        ) {
+          this.real_event.push(event);
+        }
+      });
+    },
   },
   methods: {
     show: function(event) {

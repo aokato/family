@@ -110,6 +110,7 @@ export default {
       const text_id = this.$route.params.text_id;
       const timestamp = new Date();
 
+
       let user_count = db.collection("counts").doc(current_user.uid);
       user_count.get().then(doc => {
         const array = {
@@ -134,6 +135,7 @@ export default {
                   });
                 this.done = true;
               }
+
             }
           }
         }

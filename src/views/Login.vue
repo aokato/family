@@ -1,12 +1,9 @@
 <template>
   <div class="container">
     <div class="login-container">
-      <button type="button" @click="doLogin">
-        <span>ログイン</span>
+      <button type="button" @click="doLogin" class="btn-square-above-look">
+        <span>さあ、今日も頑張ろうか</span>
       </button>
-    </div>
-    <div class="register-link">
-      <router-link to="/register">新規登録の方はこちらから</router-link>
     </div>
   </div>
 </template>
@@ -31,18 +28,15 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(result => {
-          console.log(result.user.uid);
           db.collection("public-users")
             .doc(result.user.uid)
             .get()
             .then(doc => {
-              console.log(doc.exists);
               if (doc.exists) {
                 const publicUser = {
                   id: doc.id,
                   ...doc.data(),
                 };
-                console.log(publicUser);
                 store.commit("setPublicUser", publicUser);
                 router.push("/");
               } else {
@@ -77,18 +71,18 @@ export default {
                     };
                     store.commit("setPublicUser", publicUser);
                     store.commit("setPrivateUser", privateUser);
-                    console.log("はいったよん");
                     router.push("/");
                   })
                   .catch(error => {
-                    console.error("できてないよ", error);
+                    this.errorMessage = error.message;
+                    this.showError = true;
+
                     router.push("/login");
                   });
               }
             });
         })
         .catch(error => {
-          console.log(error);
           this.errorMessage = error.message;
           this.showError = true;
         });
@@ -97,8 +91,48 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   margin-top: 300px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.btn-square-above-look {
+  display: inline-block;
+  position: relative;
+  padding: 0.35em 1em;
+  background: #668ad8; /*ボタン色*/
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-square-above-look:before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: -webkit-calc(100% - 16px);
+  width: calc(100% - 16px);
+  height: 0;
+  border: solid 8px transparent;
+  border-bottom-color: #8eacec; /*ボタン色より明るめの色に*/
+}
+
+.btn-square-above-look:active {
+  /*押したとき*/
+  padding: 0.32em 0.9em;
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.btn-square-above-look:active:before {
+  width: -webkit-calc(100% - 12px);
+  width: calc(100% - 12px);
+}
+
+.btn-square-above-look:active:before {
+  top: -12px;
+  border-width: 6px;
 }
 </style>

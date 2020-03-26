@@ -7,6 +7,8 @@ import Product from "../views/Products.vue";
 import Show from "../views/Show.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import Admin from "../views/Admin.vue";
+
 import store from "@/store";
 import { db } from "@/firebase";
 
@@ -49,6 +51,21 @@ const routes = [
     name: "register",
     component: Register,
   },
+  {
+    path: "/admin",
+    name: "admin",
+    component: Admin,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.state.publicUser.role === "mentor" ||
+        store.state.publicUser.role === "manager"
+      ) {
+        next();
+      } else {
+        router.push("/");
+      }
+    },
+  },
 ];
 
 const router = new VueRouter({
@@ -64,7 +81,6 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     if (!store.state.currentUser) {
-      console.log(store.state.currentUser);
       next({ path: "/login" });
     } else {
       if (store.state.publicUser.length !== 0) {
@@ -86,7 +102,6 @@ router.beforeEach((to, from, next) => {
               ...doc.data(),
             };
             store.commit("setPublicUser", publicUser);
-            console.log("はいったよん");
             if (
               store.state.publicUser.status !== "none" &&
               store.state.publicUser.status !== "unApproved"

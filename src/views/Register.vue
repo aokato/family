@@ -12,11 +12,6 @@
               class="form-control"
               placeholder="ギーク 太郎"
             />
-            <!-- <small
-              v-bind:class="{ 'is-hide': validation.newName }"
-              class="form-text text-info"
-              >{{ erMessage.newName }}</small
-            > -->
           </div>
         </div>
       </div>
@@ -78,7 +73,7 @@
       </div>
       <!-- v-bind:disabled="!isValid" -->
       <div class="btn-container">
-        <button type="button" @click="doRegister">
+        <button type="button" @click="doRegister" value="Submit">
           送信
         </button>
       </div>
@@ -97,30 +92,11 @@ export default {
       newName: "",
       courseSelected: "",
       periodSelected: "",
-      // erMessage: {
-      //   name: "名前を入力してください",
-      // },
       errorMessage: "",
       showError: false,
     };
   },
 
-  // computed: {
-  //   validation() {
-  //     const form = this.form;
-  //     return {
-  //       name: !!form.name,
-  //       courseSelected: !!form.courseSelected,
-  //       periodSelected: !!form.periodSelected,
-  //     };
-  //   },
-  //   isValid() {
-  //     var validation = this.validation;
-  //     return Object.keys(validation).every(function(key) {
-  //       return validation[key];
-  //     });
-  //   },
-  // },
   methods: {
     doRegister() {
       db.collection("public-users")
@@ -142,14 +118,8 @@ export default {
                 ...doc.data(),
               };
               store.commit("setPublicUser", publicUser);
-              console.log("登録成功だお");
-              console.log(publicUser);
               alert("登録成功だお！おめでと～");
               router.push("/");
-            })
-            .catch(error => {
-              console.log("できてないお", error);
-              router.push("/register");
             });
         });
     },

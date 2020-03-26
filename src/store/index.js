@@ -11,6 +11,7 @@ const initialState = {
   publicUser: {},
   privateUser: {},
   currentUser: null,
+  real_event: [],
 };
 
 const store = new Vuex.Store({
@@ -26,6 +27,9 @@ const store = new Vuex.Store({
     setCurrentUser(state, currentUser) {
       state.currentUser = currentUser;
     },
+    setRealEvent(state, real_event) {
+      state.real_event = real_event;
+    },
   },
   getters: {
     isVerified(state) {
@@ -33,6 +37,12 @@ const store = new Vuex.Store({
     },
     userStatus(state) {
       return state.publicUser.status;
+    },
+    userRole(state) {
+      return state.publicUser.role;
+    },
+    isCurrentUser(state) {
+      return state.currentUser;
     },
   },
   plugins: [createPersistedState()],

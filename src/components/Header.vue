@@ -20,17 +20,39 @@
         Products
       </div>
     </router-link>
-    <a @click="doLogout" class="mobile-hidden">
+    <router-link to="/admin" class="mobile-hidden" v-if="userRole === 'mentor'">
+      <div class="header-component">
+        受講生認証
+      </div>
+    </router-link>
+    <router-link
+      to="/login"
+      class="mobile-hidden"
+      v-if="isCurrentUser === null"
+    >
+      <div class="header-component">
+        ログイン
+      </div>
+    </router-link>
+
+    <a @click="doLogout" class="mobile-hidden" v-if="isCurrentUser !== null">
       <div class="header-component">
         Logout
       </div>
     </a>
-    <router-link to="/register" class="mobile-hidden">
+    <router-link
+      to="/register"
+      class="mobile-hidden"
+      v-if="userStatus === 'none' && isCurrentUser !== null"
+    >
       <div class="header-component">
-        Sign Up
+        初めての人～
       </div>
     </router-link>
-
+    <div class="nameIcon">
+      <p class="icon">{{ userIcon }}</p>
+      <p class="hello">さんこんにちは</p>
+    </div>
     <span
       class="menu-trigger slide"
       :class="{ active: isActive }"
@@ -52,6 +74,19 @@
           <router-link to="/products">
             <span @click="isActive = false"> Products</span>
           </router-link>
+          <a @click="doLogout" v-if="isCurrentUser !== null">
+            <span @click="isActive = false">
+              Logout
+            </span>
+          </a>
+          <router-link
+            to="/register"
+            v-if="userStatus === 'none' && isCurrentUser !== null"
+          >
+            <span @click="isActive = false">
+              初めての人～
+            </span>
+          </router-link>
         </div>
       </div>
     </transition>
@@ -60,6 +95,7 @@
 <script>
 import firebase from "firebase";
 import router from "@/router/index.js";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -67,21 +103,21 @@ export default {
       isActive: false,
       errorMessage: "",
       showError: false,
+      userIcon: this.$store.state.publicUser.name,
     };
   },
+  computed: mapGetters(["isCurrentUser", "userStatus", "userRole"]),
   methods: {
     doLogout() {
       firebase
         .auth()
         .signOut()
-        .then(result => {
-          console.log(result);
+        .then(() => {
           this.$store.commit("setPublicUser", {});
           this.$store.commit("setPrivateUser", {});
           router.push("/login");
         })
         .catch(error => {
-          console.log(error);
           this.errorMessage = error.message;
           this.showError = true;
         });
@@ -164,6 +200,19 @@ export default {
     }
     .pc-tab-hidden {
       display: none;
+    }
+    .nameIcon {
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    .icon {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      font-weight: 800;
+    }
+    .hello {
+      margin: 0;
+      font-family: monospace;
     }
   }
 }
