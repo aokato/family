@@ -56,16 +56,10 @@ export default {
           batch.update(userRef, { status: "unApproved" });
         }
       }
-      batch
-        .commit()
-        .then(() => {
-          console.log("追加完了");
-          this.userApprovingStatus = {};
-          alert("でけた");
-        })
-        .catch(error => {
-          console.log(error.message);
-        });
+      batch.commit().then(() => {
+        this.userApprovingStatus = {};
+        alert("でけた");
+      });
     },
   },
 };

@@ -28,18 +28,15 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(result => {
-          console.log(result.user.uid);
           db.collection("public-users")
             .doc(result.user.uid)
             .get()
             .then(doc => {
-              console.log(doc.exists);
               if (doc.exists) {
                 const publicUser = {
                   id: doc.id,
                   ...doc.data(),
                 };
-                console.log(publicUser);
                 store.commit("setPublicUser", publicUser);
                 router.push("/");
               } else {
@@ -74,18 +71,18 @@ export default {
                     };
                     store.commit("setPublicUser", publicUser);
                     store.commit("setPrivateUser", privateUser);
-                    console.log("はいったよん");
                     router.push("/");
                   })
                   .catch(error => {
-                    console.error("できてないよ", error);
+                    this.errorMessage = error.message;
+                    this.showError = true;
+
                     router.push("/login");
                   });
               }
             });
         })
         .catch(error => {
-          console.log(error);
           this.errorMessage = error.message;
           this.showError = true;
         });

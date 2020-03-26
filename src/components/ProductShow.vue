@@ -99,7 +99,6 @@ export default {
     /*post: function(val) {
       let image1 = document.getElementById("image1");
       let image2 = document.getElementById("image2");
-      console.dir(image1);
       if (val === true) {
         image2.src = image1.src;
         if (image1.naturalWidth % image1.naturalHeight == 0) {
@@ -137,22 +136,6 @@ export default {
         text_box.style.height = 50 + "px";
         this.more_msg = "more...";
       }
-    },
-  },
-  filters: {
-    img: function(value) {
-      var file = value;
-      console.dir(file);
-      /* let fileReader = new FileReader();
-      // 読み込み完了時の処理を追加
-      fileReader.onload = function() {
-        const url = this.result;
-        // img要素に表示
-        var img = document.getElementById("image");
-        img.src = url;
-        this.url = file;
-      };
-      fileReader.readAsDataURL(file);*/
     },
   },
 };

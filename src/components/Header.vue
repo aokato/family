@@ -112,14 +112,12 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(result => {
-          console.log(result);
+        .then(() => {
           this.$store.commit("setPublicUser", {});
           this.$store.commit("setPrivateUser", {});
           router.push("/login");
         })
         .catch(error => {
-          console.log(error);
           this.errorMessage = error.message;
           this.showError = true;
         });

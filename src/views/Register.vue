@@ -118,14 +118,8 @@ export default {
                 ...doc.data(),
               };
               store.commit("setPublicUser", publicUser);
-              console.log("登録成功だお");
-              console.log(publicUser);
               alert("登録成功だお！おめでと～");
               router.push("/");
-            })
-            .catch(error => {
-              console.log("できてないお", error);
-              router.push("/register");
             });
         });
     },

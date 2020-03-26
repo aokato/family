@@ -130,9 +130,7 @@ export default {
                     timestamp: timestamp,
                   },
                 })
-                .then(function() {
-                  console.log("Document successfully updated!");
-                });
+                .then(function() {});
               this.done = true;
             }
           }

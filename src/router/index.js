@@ -81,7 +81,6 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     if (!store.state.currentUser) {
-      console.log(store.state.currentUser);
       next({ path: "/login" });
     } else {
       if (store.state.publicUser.length !== 0) {
@@ -103,7 +102,6 @@ router.beforeEach((to, from, next) => {
               ...doc.data(),
             };
             store.commit("setPublicUser", publicUser);
-            console.log("はいったよん");
             if (
               store.state.publicUser.status !== "none" &&
               store.state.publicUser.status !== "unApproved"
