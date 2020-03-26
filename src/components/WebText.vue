@@ -110,43 +110,44 @@ export default {
       const text_id = this.$route.params.text_id;
       const timestamp = new Date();
 
-      let user_count = db
-        .collection("counts")
-        .doc(current_user.uid)
-        .data();
-      let array = user_count;
-      // let array2 = Object.keys(array);
-      for (let key in array) {
-        if (key == text_id) {
-          for (let key2 in array[key]) {
-            if (key2 == "count") {
-              //alert(array[key][key2]);
-              let count = Number(array[key][key2]);
-              count += 1;
-              user_count
-                .update({
-                  [key]: {
-                    count: count,
-                    timestamp: timestamp,
-                  },
-                })
-                .then(function() {
-                  console.log("Document successfully updated!");
-                });
-              this.done = true;
+      let user_count = db.collection("counts").doc(current_user.uid);
+      user_count.get().then(doc => {
+        const array = {
+          ...doc.data(),
+        };
+        for (let key in array) {
+          if (key == text_id) {
+            for (let key2 in array[key]) {
+              if (key2 == "count") {
+                //alert(array[key][key2]);
+                let count = Number(array[key][key2]);
+                count += 1;
+                user_count
+                  .update({
+                    [key]: {
+                      count: count,
+                      timestamp: timestamp,
+                    },
+                  })
+                  .then(function() {
+                    console.log("Document successfully updated!");
+                  });
+                this.done = true;
+              }
             }
           }
         }
-      }
-      if (this.done == false) {
-        alert("aaaa");
-        user_count.update({
-          [text_id]: {
-            count: 1,
-            timestamp: timestamp,
-          },
-        });
-      }
+        if (this.done == false) {
+          user_count.update({
+            [text_id]: {
+              count: 1,
+              timestamp: timestamp,
+            },
+          });
+        }
+      });
+
+      // let array2 = Object.keys(array);
 
       this.done = false;
       this.complete = false;
