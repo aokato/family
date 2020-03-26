@@ -265,7 +265,6 @@ export default {
       //  document.getElementById("products").style.backgroundColor = "transparent";
       let show_component = document.getElementById("show-component");
       let id = null;
-      console.dir(product);
       if (langages == "web") {
         id = "web-product-" + index;
       } else if (langages == "game") {
