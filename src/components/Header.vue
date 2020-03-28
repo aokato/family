@@ -65,6 +65,9 @@
     <transition name="right">
       <div id="mobile-menu" v-show="isActive" class="pc-tab-hidden">
         <div id="mobile-link-container">
+          <router-link to="/login" v-if="isCurrentUser === null">
+            <span @click="isActive = false">Login</span>
+          </router-link>
           <router-link to="/">
             <span @click="isActive = false">Top</span>
           </router-link>
@@ -292,6 +295,19 @@ export default {
     .pc-tab-hidden {
       display: none;
     }
+    .nameIcon {
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    .icon {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      font-weight: 800;
+    }
+    .hello {
+      margin: 0;
+      font-family: monospace;
+    }
   }
 }
 @media screen and (min-width: 350px) and (max-width: 700px) {
@@ -415,6 +431,19 @@ export default {
           font-size: 1.5rem;
         }
       }
+    }
+    .nameIcon {
+      margin-left: auto;
+      margin-right: 10px;
+    }
+    .icon {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      font-weight: 800;
+    }
+    .hello {
+      margin: 0;
+      font-family: monospace;
     }
   }
 }

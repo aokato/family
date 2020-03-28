@@ -76,7 +76,6 @@ export default {
                   .catch(error => {
                     this.errorMessage = error.message;
                     this.showError = true;
-
                     router.push("/login");
                   });
               }
@@ -93,11 +92,18 @@ export default {
 
 <style scoped>
 .container {
+  width: 100%;
   margin-top: 300px;
   margin-right: auto;
   margin-left: auto;
 }
-
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%);
+}
 .btn-square-above-look {
   display: inline-block;
   position: relative;
